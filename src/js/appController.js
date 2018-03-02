@@ -29,6 +29,7 @@ self.doLogin= function (username) {
   self.userLoggedIn("Y");
   var signinEvent = {
       "eventType": "userSignInEvent"
+      ,"source":"Customers Portlet"
       , "payload": {
           "username": username
       }
