@@ -24,6 +24,19 @@ define(['ojs/ojcore', 'knockout', 'ojs/ojknockout'],
       self.userLogin = ko.observable("Not yet logged in");
       self.userLoggedIn = ko.observable("N");
 
+self.doLogin= function (username) {
+  self.userLogin(username);
+  self.userLoggedIn("Y");
+  var signinEvent = {
+      "eventType": "userSignInEvent"
+      , "payload": {
+          "username": username
+      }
+  }
+  self.callParent(signinEvent)
+
+} 
+
       // this function will communicate an event with the parent window
       // typically used for applications that run inside an IFRAME to inform the
       // embedding application about what is going on.      

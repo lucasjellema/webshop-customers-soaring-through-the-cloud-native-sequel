@@ -13,18 +13,20 @@ define(
             self.loginButtonClick = function (event) {
                 //TODO add check on username and password
                 console.log("Logged in as " + self.username());
+
                 var rootViewModel = ko.dataFor(document.getElementById('globalBody'));
-                var us = rootViewModel.userLogin;
-                console.log("username = " + rootViewModel.userLogin())
-                rootViewModel.userLogin(self.username());
-                rootViewModel.userLoggedIn("Y");
-                var signinEvent = {
-                    "eventType": "userSignInEvent"
-                    , "payload": {
-                        "username": self.username()
-                    }
-                }
-                rootViewModel.callParent(signinEvent)
+                rootViewModel.doLogin(self.username())
+                // var us = rootViewModel.userLogin;
+                // console.log("username = " + rootViewModel.userLogin())
+                // rootViewModel.userLogin(self.username());
+                // rootViewModel.userLoggedIn("Y");
+                // var signinEvent = {
+                //     "eventType": "userSignInEvent"
+                //     , "payload": {
+                //         "username": self.username()
+                //     }
+                // }
+                // rootViewModel.callParent(signinEvent)
                 return true;
             }
 
