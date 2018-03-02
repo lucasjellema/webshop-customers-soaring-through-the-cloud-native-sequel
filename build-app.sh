@@ -6,7 +6,9 @@ wait
 
 npm install
 wait
-ojet build --release
+ojet build 
+# this line produced an error on uglifying one of the files
+#ojet build  --release
 wait
 cp -a ./web/. ./jet-on-node/public
 wait
