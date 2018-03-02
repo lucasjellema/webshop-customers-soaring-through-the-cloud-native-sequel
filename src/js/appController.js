@@ -10,6 +10,8 @@ define(['ojs/ojcore', 'knockout', 'ojs/ojknockout'],
     function ControllerViewModel() {
       var self = this;
 
+      $(document).ready(function () { self.init(); })
+
       // Media queries for repsonsive layouts
       var smQuery = oj.ResponsiveUtils.getFrameworkQuery(oj.ResponsiveUtils.FRAMEWORK_QUERY_KEY.SM_ONLY);
       self.smScreen = oj.ResponsiveKnockoutUtils.createMediaQueryObservable(smQuery);
@@ -45,10 +47,14 @@ define(['ojs/ojcore', 'knockout', 'ojs/ojknockout'],
           if (event.data.eventType == "globalContext") {
             var un = event.data.payload.globalContext.userName;
             self.userLogin(un)
+            this.console.log("Message from global context - username = " + un)
+            if (un == "Not yet logged in" || un == "") {
+              self.userLoggedIn("N");
+            } else { self.userLoggedIn("Y") }
           }
         },
           false);
-        self.callParent({ "Customers child HasLoaded": true })
+        self.callParent({ "childHasLoaded": true })
       }
       $(document).ready(function () { self.init(); })
 

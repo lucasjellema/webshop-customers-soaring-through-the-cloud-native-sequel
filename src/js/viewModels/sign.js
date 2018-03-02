@@ -7,7 +7,7 @@ define(
             var self = this;
 
 
-            self.username = ko.observable("You");
+            self.username = ko.observable();
             self.password = ko.observable();
 
             self.loginButtonClick = function (event) {

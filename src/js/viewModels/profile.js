@@ -25,16 +25,16 @@ define(
                 // embedding application
                 window.addEventListener("message", function (event) {
                   console.log("Received message from embedding application " + event);
-                  console.log("Payload =  " + JSON.stringify(event.data));
+                  console.log("Payload of message =  " + JSON.stringify(event.data));
                   if (event.data.eventType =="globalContext") {
                       var un = event.data.payload.globalContext.userName;
-                      self.username(un)
+                      this.console.log("Message from global context - username = "+un)
                   }
                 },
                   false);
                   self.callParent({"childHasLoaded":true})
               }
-              $(document).ready(function () { self.init(); })
+            //  $(document).ready(function () { self.init(); })
 
         }
 
