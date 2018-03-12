@@ -53,6 +53,10 @@ define(['ojs/ojcore', 'knockout', 'ojs/ojknockout'],
         parent.postMessage(message, targetOrigin);
 
       }
+self.globalContextListeners = [];
+self.registerGlobalContextListener = function(listener) {
+    self.globalContextListeners.push(listener)
+}
 
       self.init = function () {
         // listener for events posted on the window;
@@ -71,6 +75,8 @@ define(['ojs/ojcore', 'knockout', 'ojs/ojknockout'],
             if (un == "Not yet logged in" || un == "") {
               self.userLoggedIn("N");
             } else { self.userLoggedIn("Y") }
+            //inform listeners of new global context
+            globalContextListeners.forEach(function(listene) {listener(self.globalContext)} ) 
           }
         },
           false);
