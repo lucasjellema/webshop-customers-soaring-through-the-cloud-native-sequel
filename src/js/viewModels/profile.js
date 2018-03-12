@@ -5,36 +5,16 @@ define(
         'use strict';
         function ProfileModel() {
             var self = this;
+            var rootViewModel = ko.dataFor(document.getElementById('globalBody'));
 
-            // this function will communicate an event with the parent window
-            // typically used for applications that run inside an IFRAME to inform the
-            // embedding application about what is going on.      
-            self.callParent = function (message) {
-                console.log('send message from Catalog to parent window');
-                // here we can restrict which parent page can receive our message
-                // by specifying the origin that this page should have
-                var targetOrigin = '*';
-                parent.postMessage(message, targetOrigin);
+            var customer = rootViewModel.globalContext.customer
+            self.firstName = ko.observable(customer.firstName );
+            self.lastName = ko.observable(customer.lastName);
 
+            self.saveProfile = function (event) {
+                //TODO add code to save changes to the profile to the backend service 
+                console.log("Handle Saving Profile")
             }
-
-
-            self.init = function () {
-                // listener for events posted on the window;
-                // used for applications running insidean IFRAME to receive events from the
-                // embedding application
-                window.addEventListener("message", function (event) {
-                  console.log("Received message from embedding application " + event);
-                  console.log("Payload of message =  " + JSON.stringify(event.data));
-                  if (event.data.eventType =="globalContext") {
-                      var un = event.data.payload.globalContext.userName;
-                      this.console.log("Message from global context - username = "+un)
-                  }
-                },
-                  false);
-                  self.callParent({"childHasLoaded":true})
-              }
-            //  $(document).ready(function () { self.init(); })
 
         }
 

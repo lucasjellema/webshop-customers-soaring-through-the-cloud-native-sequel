@@ -1,6 +1,16 @@
 <h2>Your profile <span data-bind="text: $root.userLogin"></span></h2>
-<!-- <p>Current user:<span data-bind="text: username"></span></p> -->
 (from the Oracle JET Application 2018-customers-portal-soaring-clouds-sequel, view profile.html)
 <div class="oj-hybrid-padding">
   <h1>Customers Area for Editing Their Profile</h1>
+  <div>
+    <oj-label for="firstname-input">First Name</oj-label>
+    <oj-input-text id="firstname-input" value="{{firstName}}"></oj-input-text>
+
+    <br/>
+    <oj-label for="lastname">Last Name</oj-label>
+    <oj-input-text id="lastname" value="{{lastName}}">
+    </oj-input-text>
+    <br/>
+    <oj-button id='save' on-click='[[saveProfile]]'>Save</oj-button>
+  </div>
 </div>
