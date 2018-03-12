@@ -76,7 +76,7 @@ self.registerGlobalContextListener = function(listener) {
               self.userLoggedIn("N");
             } else { self.userLoggedIn("Y") }
             //inform listeners of new global context
-            globalContextListeners.forEach(function(listene) {listener(self.globalContext)} ) 
+            self.globalContextListeners.forEach(function(listene) {listener(self.globalContext)} ) 
           }
         },
           false);
