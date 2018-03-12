@@ -2,6 +2,15 @@
   "name": "2018-customers-portal-soaring-clouds-sequel",
   "version": "1.0.0",
   "description": "An Oracle JavaScript Extension Toolkit(JET) web app",
+  "eslintConfig": {
+    "parserOptions": {
+      "ecmaVersion": 8
+    },
+    "env": {
+      "node": true
+    },
+    "extends": "eslint:recommended"
+  },
   "dependencies": {
     "@oracle/oraclejet": "~4.1.0"
   },
