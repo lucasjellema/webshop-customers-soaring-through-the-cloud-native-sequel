@@ -19,8 +19,18 @@ define(
             self.email = ko.observable (customer.email);
             self.dateOfBirth = ko.observable(customer.dateOfBirth);
             self.password = ko.observable(customer.password);
-            self.newsLetter = ko.observable(customer.preferences.newsLetter);
-            self.offers = ko.observable(customer.preferences.offers);
+            var newsletter = "false";
+            var offers = "false";
+            if(customer.preferences){
+                newsletter = customer.preferences.newsLetter;
+                offers = customer.preferences.offers;
+            }
+            self.newsLetter = ko.observable(newsletter);
+            self.offers = ko.observable(offers);
+            
+            if(customer.addresses){
+                //put the address in
+            }
 
  
 
