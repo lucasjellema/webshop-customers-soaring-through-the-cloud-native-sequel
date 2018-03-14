@@ -28,9 +28,29 @@ define(
             self.newsLetter = ko.observable(newsletter);
             self.offers = ko.observable(offers);
             
+            var addressType = "BILLING";
+            var streetName;
+            var streetNumber;
+            var city;
+            var country;
+            
+            
             if(customer.addresses){
-                //put the address in
+                if(customer.addresses.length > 0){
+                    addressType = customer.addresses[0].type;
+                    streetName = customer.addresses[0].streetName;
+                    streetNumber = customer.addresses[0].streetNumber;
+                    city = customer.addresses[0].city;
+                    country = customer.addresses[0].country;
+                }
             }
+            
+            self.addressType = ko.observable(addressType);
+            self.streetName = ko.observable(streetName);
+            self.streetNumber = ko.observable(streetNumber);
+            self.city = ko.observable(city);
+            self.country = ko.observable(country);
+  
             
             //payment details
             //TODO make it take multiple cards, currently it only shows the first card and you can only update a card, not add it.
@@ -81,6 +101,9 @@ define(
                     details.push(updatedPaymentDetail);
                     updatedCustomer.paymentDetails = details;
                 }
+                
+                
+                //TODO save the address and make it possible to add addresses
 
                 return $.ajax({
                     type: 'PUT',
