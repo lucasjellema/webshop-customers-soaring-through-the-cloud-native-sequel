@@ -1,30 +1,68 @@
 define(
-    ['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojinputtext', 'ojs/ojbutton'
+    ['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojinputtext', 'ojs/ojbutton', 'ojs/ojdatetimepicker', 'ojs/ojlabel', 'ojs/ojselectcombobox', 'ojs/ojswitch'
     ],
     function (oj, ko, $) {
         'use strict';
         function ProfileModel() {
+            
             var self = this;
+            
+            //var customersMSAPIEndpoint = "https://oc-144-21-82-92.compute.oraclecloud.com:9129/api/customer"
+            var customersMSAPIEndpoint = "http://localhost:8080/customer";
+            
             var rootViewModel = ko.dataFor(document.getElementById('globalBody'));
-            var customer = rootViewModel.globalContext.customer
+            var customer = rootViewModel.globalContext.customer;
+     
             self.firstName = ko.observable(customer.firstName );
             self.lastName = ko.observable(customer.lastName);
+            self.title = ko.observable(customer.title);
+            self.email = ko.observable (customer.email);
+            self.dateOfBirth = ko.observable(customer.dateOfBirth);
+            self.password = ko.observable(customer.password);
+            self.newsLetter = ko.observable(customer.preferences.newsLetter);
+            self.offers = ko.observable(customer.preferences.offers);
 
-             rootViewModel.registerGlobalContextListener(
-                 function (globalContext) {
-                     console.log("profile - global context listener - receiving global context "+JSON.stringify(globalContext))
-                    var customer = globalContext.customer
-                    self.firstName(customer.firstName );
-                    self.lastName(customer.lastName);
-        
-                 }
-             )
  
 
             self.saveProfile = function (event) {
-                //TODO add code to save changes to the profile to the backend service 
-                console.log("Handle Saving Profile")
-            }
+                
+                var updatedCustomer = {
+                    "firstName": self.firstName(),
+                    "lastName": self.lastName(),
+                    "title": self.title(),
+                    "email": self.email(),
+                    "dateOfBirth": self.dateOfBirth().toString(),
+                    "password": self.password(),
+                    "preferences": {
+                        "newsLetter": self.newsLetter(),
+                        "offers": self.offers()
+                        
+                    }
+                };
+
+                return $.ajax({
+                    type: 'PUT',
+                    url: customersMSAPIEndpoint + "/profile/" + customer._id,
+                    data: JSON.stringify(updatedCustomer),
+                    contentType: 'application/json; charset=UTF-8',
+
+                    success: function (msg, status, jqXHR) {
+                        return true;
+                    },
+                    failure: function (textStatus, errorThrown) {
+                        alert('Login Failed' + textStatus);
+                        return false;
+
+                    }
+                }).done(function (response) {
+                    //we are done saving
+
+                }).fail(function (textStatus, errorThrown) {
+                    alert('error updating: ' + JSON.stringify(textStatus));
+
+                });
+
+            };
 
         }
 
