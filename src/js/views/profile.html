@@ -85,28 +85,43 @@
                 <div class="oj-flex-item"> 
                     <div class="oj-form oj-sm-odd-cols-12 oj-md-odd-cols-4 oj-md-labels-inline oj-form-no-dividers"> 
                         <h3 class="oj-header-border">Payment Details</h3>
+                        
                         <div class="oj-flex"> 
                             <div class="oj-flex-item">
-                                <oj-label for="B1control">B row 1</oj-label>
+                                <oj-label for="type">Type</oj-label>
                             </div>
-                            <div class="oj-flex-item">
-                                <oj-input-text id="B1control" value="text"></oj-input-text>
+                              <div class="oj-flex-item">
+
+                                <oj-select-one id="type" value="{{paymentType}}" style="max-width:20em">
+                                    <oj-option value="CREDIT">Credit card</oj-option>
+                                    <oj-option value="DEBIT">Paypall</oj-option>
+                             
+                                </oj-select-one>
+
                             </div>
                         </div>
                         <div class="oj-flex"> 
                             <div class="oj-flex-item">
-                                <oj-label for="B2control">B row 2</oj-label>
+                                <oj-label for="cardnumber">Card Number</oj-label>
                             </div>
                             <div class="oj-flex-item">
-                                <oj-input-text id="B2control" value="text"></oj-input-text>
+                                <oj-input-text id="cardnumber" value="{{cardNumber}}"></oj-input-text>
                             </div>
                         </div>
                         <div class="oj-flex"> 
                             <div class="oj-flex-item">
-                                <oj-label for="B3control">B row 3</oj-label>
+                                <oj-label for="expirationDate">Expiration date (MM-YY)</oj-label>
                             </div>
                             <div class="oj-flex-item">
-                                <oj-input-text id="B3control" value="text"></oj-input-text>
+                                <oj-input-text id="expirationDate" value="{{expirationDate}}"></oj-input-text>
+                            </div>
+                        </div>
+                        <div class="oj-flex"> 
+                            <div class="oj-flex-item">
+                                <oj-label for="nameOnCard">Name on Card</oj-label>
+                            </div>
+                            <div class="oj-flex-item">
+                                <oj-input-text id="nameOnCard" value="{{nameOnCard}}"></oj-input-text>
                             </div>
                         </div>
                         <h3 class="oj-header-border">Preferences</h3>
