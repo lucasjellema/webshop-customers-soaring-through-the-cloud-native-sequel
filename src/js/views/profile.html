@@ -64,20 +64,51 @@
                             </div>
                         </div>
                         <h3 class="oj-header-border">Addresses</h3>
+                        
                         <div class="oj-flex"> 
                             <div class="oj-flex-item">
-                                <oj-label for="A2control">A row 2</oj-label>
+                                <oj-label for="type">Type</oj-label>
                             </div>
-                            <div class="oj-flex-item">
-                                <oj-text-area id="A2control" value='text' rows="6"></oj-text-area>
+                             <div class="oj-flex-item">
+
+                                <oj-select-one id="type" value="{{addressType}}" style="max-width:20em">
+                                    <oj-option value="BILLING">Billing</oj-option>
+                                    <oj-option value="DELIVERY">Delivery</oj-option>
+                             
+                                </oj-select-one>
+
                             </div>
                         </div>
                         <div class="oj-flex"> 
                             <div class="oj-flex-item">
-                                <oj-label for="A3control">A row 3</oj-label>
+                                <oj-label for="streetName">Street Name</oj-label>
                             </div>
                             <div class="oj-flex-item">
-                                <oj-input-text id="A3control" value="text"></oj-input-text>
+                                <oj-input-text id="streetName" value="{{streetName}}"></oj-input-text>
+                            </div>
+                        </div>
+                        <div class="oj-flex"> 
+                            <div class="oj-flex-item">
+                                <oj-label for="streetNumber">Street Number</oj-label>
+                            </div>
+                            <div class="oj-flex-item">
+                                <oj-input-text id="streetNumber" value="{{streetNumber}}"></oj-input-text>
+                            </div>
+                        </div>
+                 <div class="oj-flex"> 
+                            <div class="oj-flex-item">
+                                <oj-label for="city">City</oj-label>
+                            </div>
+                            <div class="oj-flex-item">
+                                <oj-input-text id="streetName" value="{{city}}"></oj-input-text>
+                            </div>
+                        </div>
+                 <div class="oj-flex"> 
+                            <div class="oj-flex-item">
+                                <oj-label for="country">country</oj-label>
+                            </div>
+                            <div class="oj-flex-item">
+                                <oj-input-text id="country" value="{{country}}"></oj-input-text>
                             </div>
                         </div>
                     </div>
