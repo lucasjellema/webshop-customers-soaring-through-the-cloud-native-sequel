@@ -1,5 +1,5 @@
 {
-  "name": "customer-ui",
+  "name": "customer-ms-ui",
   "version": "2.0.0",
   "description": "An Oracle JavaScript Extension Toolkit(JET) web app for customers microservice",
   "dependencies": {
