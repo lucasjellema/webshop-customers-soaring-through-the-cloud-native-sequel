@@ -9,7 +9,7 @@
     "@oracle/grunt-oraclejet": "~4.1.0",
     "@oracle/oraclejet-tooling": "~4.1.0",
     "grunt": "^1.0.3",
-    "load-grunt-config": "0.19.2",
+    "load-grunt-config": "~0.19.2",
     "qunit-reporter-junit": "^1.1.1",
     "qunitjs": "^2.3.3"
   },
