@@ -1,3 +1,5 @@
+var customersMSAPIEndpoint = process.env.CUSTOMER_MS_ENDPOINT || "localhost:8080/customer";
+
 define(
     ['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojinputtext', 'ojs/ojbutton', 'ojs/ojdatetimepicker', 'ojs/ojlabel', 'ojs/ojselectcombobox', 'ojs/ojswitch'
     ],
@@ -7,7 +9,7 @@ define(
             
             var self = this;
             
-            var customersMSAPIEndpoint = "https://oc-144-21-82-92.compute.oraclecloud.com:9129/api/customer"
+            //var customersMSAPIEndpoint = "https://oc-144-21-82-92.compute.oraclecloud.com:9129/api/customer"
             //var customersMSAPIEndpoint = "http://localhost:8080/customer";
             
             var rootViewModel = ko.dataFor(document.getElementById('globalBody'));

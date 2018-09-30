@@ -1,3 +1,5 @@
+var customersMSAPIEndpoint = process.env.CUSTOMER_MS_ENDPOINT || "localhost:8080/customer";
+
 define(
     ['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojinputtext', 'ojs/ojbutton'
     ],
@@ -5,7 +7,7 @@ define(
         'use strict';
         function SignModel() {
             var self = this;
-            var customersMSAPIEndpoint = "https://oc-144-21-82-92.compute.oraclecloud.com:9129/api/customer"
+            /var customersMSAPIEndpoint = "https://oc-144-21-82-92.compute.oraclecloud.com:9129/api/customer"
             //var customersMSAPIEndpoint = "http://localhost:8080/customer";
             //var apiKey = "73f1c312-64e1-4069-92d8-0179ac056e90"
 

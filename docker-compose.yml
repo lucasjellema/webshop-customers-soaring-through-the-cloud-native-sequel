@@ -1,0 +1,6 @@
+version: 2
+services:
+  customer-ms-ui:
+    image: lonneke/customer-ms-ui-2.0.0.0
+    ports:
+      - '7791:80/tcp'
