@@ -22,4 +22,3 @@ module.exports = function(grunt) {
     grunt.task.run([`oraclejet-serve:${buildType}`]);
   }); 
 };
-

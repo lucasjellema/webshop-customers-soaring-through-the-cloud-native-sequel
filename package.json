@@ -1,29 +1,27 @@
 {
-  "name": "2018-customers-portal-soaring-clouds-sequel",
-  "version": "1.0.0",
-  "description": "An Oracle JavaScript Extension Toolkit(JET) web app",
-  "eslintConfig": {
-    "parserOptions": {
-      "ecmaVersion": 8
-    },
-    "env": {
-      "node": true
-    },
-    "extends": "eslint:recommended"
-  },
+  "name": "customer-ms-ui",
+  "version": "2.0.0",
+  "description": "An Oracle JavaScript Extension Toolkit(JET) web app for customers microservice",
   "dependencies": {
     "@oracle/oraclejet": "~4.1.0"
   },
   "devDependencies": {
-    "grunt": "^1.0.1",
     "@oracle/grunt-oraclejet": "~4.1.0",
-    "load-grunt-config": "0.19.2",
     "@oracle/oraclejet-tooling": "~4.1.0",
+    "grunt": "^1.0.3",
+    "load-grunt-config": "~0.19.2",
     "qunit-reporter-junit": "^1.1.1",
     "qunitjs": "^2.3.3"
   },
   "engines": {
     "node": ">=0.10.0"
+  },
+  "scripts": {
+    "start": "grunt oracle-jet-serve",
+    "build:image": "lonneke/customer-ms-ui .",
+    "remove-image": "docker rmi lonneke/customer-ms-ui",
+    "start:container": "docker run --name customer-ms-ui -p 8080:80 -d  lonneke/customer-ms-ui",
+    "stop:container": "docker rm -f lonneke-customer-ms-ui"
   },
   "private": true
 }
