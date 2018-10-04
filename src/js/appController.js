@@ -5,11 +5,20 @@
 /*
  * Your application specific code will go here
  */
-define(['ojs/ojcore', 'knockout', 'ojs/ojknockout'],
+define(['ojs/ojcore', 'knockout', 'ojs/ojknockout','ojs/ojrouter'],
   function (oj, ko) {
     function ControllerViewModel() {
       var self = this;
       self.globalContext = {}
+      
+       // Router setup
+         self.router = oj.Router.rootInstance;
+         self.router.configure({
+           'profile': { label: 'Profile'},
+           'sign': { label: 'Sign' , isDefault: true }
+         });
+         oj.Router.defaults['urlAdapter'] = new oj.Router.urlParamAdapter();
+
 
       $(document).ready(function () { self.init(); })
 
@@ -39,6 +48,10 @@ define(['ojs/ojcore', 'knockout', 'ojs/ojknockout'],
         }
         self.callParent(signinEvent)
         
+      }
+      
+      self.initEmptyCustomer = function(){
+                  self.globalContext.customer = '';
       }
 
       // this function will communicate an event with the parent window

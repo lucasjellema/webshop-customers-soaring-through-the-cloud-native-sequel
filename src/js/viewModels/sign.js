@@ -46,6 +46,21 @@ define(
 
 
             };
+         
+            self.signUpLinkClick = function (event) {
+                var user = {
+                    'username': self.username(),
+                    'password': self.password()
+                };
+
+                // make sure to create an empty customer object 
+                var rootViewModel = ko.dataFor(document.getElementById('globalBody'));
+                rootViewModel.initEmptyCustomer();
+                // navigate to the module that allows us to sign up
+                console.log(oj.Router);
+                oj.Router.rootInstance.go('profile');
+
+            };            
 
             self.init = function () {
             };
