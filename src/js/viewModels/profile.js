@@ -7,7 +7,7 @@ define(
             
             var self = this;
             
-            var customersMSAPIEndpoint = "http://oc-129-156-113-240.compute.oraclecloud.com:8011/customer"
+            var customersMSAPIEndpoint = "http://oc-129-156-113-240.compute.oraclecloud.com:8011/customer";
             //var customersMSAPIEndpoint = "http://localhost:8080/customer";
             
             var rootViewModel = ko.dataFor(document.getElementById('globalBody'));
@@ -104,8 +104,10 @@ define(
                 
                 
                 //TODO save the address and make it possible to add addresses
-
-                return $.ajax({
+                
+                if(customer._id){
+                //update the profile
+                    return $.ajax({
                     type: 'PUT',
                     url: customersMSAPIEndpoint + "/profile/" + customer._id,
                     data: JSON.stringify(updatedCustomer),
@@ -126,7 +128,30 @@ define(
                     alert('error updating: ' + JSON.stringify(textStatus));
 
                 });
+                }
+                else{
+                    return $.ajax({
+                    type: 'POST',
+                    url: customersMSAPIEndpoint + "/profile/",
+                    data: JSON.stringify(updatedCustomer),
+                    contentType: 'application/json; charset=UTF-8',
 
+                    success: function (msg, status, jqXHR) {
+                        return true;
+                    },
+                    failure: function (textStatus, errorThrown) {
+                        alert('Login Failed' + textStatus);
+                        return false;
+
+                    }
+                }).done(function (response) {
+                    //we are done saving
+
+                }).fail(function (textStatus, errorThrown) {
+                    alert('error updating: ' + JSON.stringify(textStatus));
+
+                });
+                }
             };
 
         }
