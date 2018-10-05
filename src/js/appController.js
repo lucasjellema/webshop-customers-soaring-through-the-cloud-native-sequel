@@ -51,9 +51,6 @@ define(['ojs/ojcore', 'knockout', 'ojs/ojknockout','ojs/ojrouter'],
         
       };
       
-      self.initEmptyCustomer = function(){
-                  self.globalContext.customer = '';
-      };
 
       // this function will communicate an event with the parent window
       // typically used for applications that run inside an IFRAME to inform the

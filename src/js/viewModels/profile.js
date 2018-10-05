@@ -12,7 +12,14 @@ define(
             
             var rootViewModel = ko.dataFor(document.getElementById('globalBody'));
             var customer = rootViewModel.globalContext.customer;
-     
+            
+            if(!customer){
+                customer = {};
+                customer.addresses = [];
+                customer.paymentDetails = {};
+                cusstomer.preferences = {};
+            }
+               
             self.firstName = ko.observable(customer.firstName );
             self.lastName = ko.observable(customer.lastName);
             self.title = ko.observable(customer.title);
