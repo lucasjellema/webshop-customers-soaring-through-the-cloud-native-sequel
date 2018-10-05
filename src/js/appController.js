@@ -9,7 +9,8 @@ define(['ojs/ojcore', 'knockout', 'ojs/ojknockout','ojs/ojrouter'],
   function (oj, ko) {
     function ControllerViewModel() {
       var self = this;
-      self.globalContext = {}
+      self.globalContext = {};
+      
       
        // Router setup
          self.router = oj.Router.rootInstance;
@@ -20,7 +21,7 @@ define(['ojs/ojcore', 'knockout', 'ojs/ojknockout','ojs/ojrouter'],
          oj.Router.defaults['urlAdapter'] = new oj.Router.urlParamAdapter();
 
 
-      $(document).ready(function () { self.init(); })
+      $(document).ready(function () { self.init(); });
 
       // Media queries for repsonsive layouts
       var smQuery = oj.ResponsiveUtils.getFrameworkQuery(oj.ResponsiveUtils.FRAMEWORK_QUERY_KEY.SM_ONLY);
@@ -45,14 +46,14 @@ define(['ojs/ojcore', 'knockout', 'ojs/ojknockout','ojs/ojrouter'],
             "username": customer.email,
             "customer": customer
           }
-        }
-        self.callParent(signinEvent)
+        };
+        self.callParent(signinEvent);
         
-      }
+      };
       
       self.initEmptyCustomer = function(){
                   self.globalContext.customer = '';
-      }
+      };
 
       // this function will communicate an event with the parent window
       // typically used for applications that run inside an IFRAME to inform the
@@ -65,11 +66,11 @@ define(['ojs/ojcore', 'knockout', 'ojs/ojknockout','ojs/ojrouter'],
         message.sourcePortlet = "customers";
         parent.postMessage(message, targetOrigin);
 
-      }
+      };
 self.globalContextListeners = [];
 self.registerGlobalContextListener = function(listener) {
-    self.globalContextListeners.push(listener)
-}
+    self.globalContextListeners.push(listener);
+};
 
       self.init = function () {
         // listener for events posted on the window;
@@ -78,14 +79,14 @@ self.registerGlobalContextListener = function(listener) {
         window.addEventListener("message", function (event) {
           console.log("Received message from embedding application " + event);
           console.log("Payload =  " + JSON.stringify(event.data));
-          if (event.data.eventType == "globalContext") {
-            self.globalContext = event.data.payload.globalContext
+          if (event.data.eventType === "globalContext") {
+            self.globalContext = event.data.payload.globalContext;
             var un = self.globalContext.userName;
             if (self.globalContext.customer){
                self.userLogin(self.globalContext.customer.title + " " + self.globalContext.customer.firstName + " " + self.globalContext.customer.lastName);
-            }
-            this.console.log("Message from global context - username = " + un)
-            if (un == "Not yet logged in" || un == "") {
+            };
+            this.console.log("Message from global context - username = " + un);
+            if (un === "Not yet logged in" || un === "") {
               self.userLoggedIn("N");
             } else { self.userLoggedIn("Y") }
             //inform listeners of new global context
@@ -93,9 +94,9 @@ self.registerGlobalContextListener = function(listener) {
           }
         },
           false);
-        self.callParent({ "childHasLoaded": true })
-      }
-      $(document).ready(function () { self.init(); })
+        self.callParent({ "childHasLoaded": true });
+      };
+      $(document).ready(function () { self.init(); });
 
     }
 
