@@ -9,6 +9,21 @@
                 <div class="oj-flex-item"> 
                     <div class="oj-form oj-sm-odd-cols-12 oj-md-odd-cols-4 oj-md-labels-inline oj-form-no-dividers"> 
                         <h3 class="oj-header-border">Personal details</h3>
+                          <div class="oj-flex">  
+                            <div class="oj-flex-item">
+                                <oj-label for="Title">Title</oj-label>
+                            </div>
+                            <div class="oj-flex-item">
+
+                                <oj-select-one id="Title" value="{{title}}" style="max-width:20em">
+                                    <oj-option value="Mr">Mister</oj-option>
+                                    <oj-option value="Mrs">Mrs</oj-option>
+                                    <oj-option value="Ms">Ms</oj-option>
+                                    <oj-option value="Miss">Miss</oj-option>
+                                </oj-select-one>
+
+                            </div>
+                        </div>
                         <div class="oj-flex">  
                             <div class="oj-flex-item">
                                 <oj-label for="firstName">First Name</oj-label>
@@ -27,25 +42,18 @@
                         </div>
                         <div class="oj-flex">  
                             <div class="oj-flex-item">
-                                <oj-label for="Title">Title</oj-label>
+                                <oj-label for="Email">Email</oj-label>
                             </div>
                             <div class="oj-flex-item">
-
-                                <oj-select-one id="Title" value="{{title}}" style="max-width:20em">
-                                    <oj-option value="Mr">Mister</oj-option>
-                                    <oj-option value="Mrs">Mrs</oj-option>
-                                    <oj-option value="Ms">Ms</oj-option>
-                                    <oj-option value="Miss">Miss</oj-option>
-                                </oj-select-one>
-
+                                <oj-input-text id="Email" value="{{email}}"></oj-input-text>
                             </div>
                         </div>
                         <div class="oj-flex">  
                             <div class="oj-flex-item">
-                                <oj-label for="Email">Email</oj-label>
+                                <oj-label for="Password">Password</oj-label>
                             </div>
                             <div class="oj-flex-item">
-                                <oj-input-text id="Email" value="{{email}}" readonly="true"></oj-input-text>
+                                <oj-input-password id="Password" value="{{password}}"></oj-input-password>
                             </div>
                         </div>
                         <div class="oj-flex">  
@@ -55,14 +63,7 @@
                             <div class="oj-flex-item">
                                 <oj-input-date id="DateOfBirth" value="{{dateOfBirth}}"></oj-input-date>
                             </div>
-                        </div> <div class="oj-flex">  
-                            <div class="oj-flex-item">
-                                <oj-label for="Password">Password</oj-label>
-                            </div>
-                            <div class="oj-flex-item">
-                                <oj-input-password id="Password" value="{{password}}" readonly="true"></oj-input-password>
-                            </div>
-                        </div>
+                        </div> 
                         <h3 class="oj-header-border">Addresses</h3>
                         
                         <div class="oj-flex"> 
@@ -175,7 +176,5 @@
                     </div>
                 </div>
             </div>
-
-
         </div>
     </div>

@@ -30,7 +30,7 @@ requirejs.config(
     'signals': 'libs/js-signals/signals',
     'customElements': 'libs/webcomponents/custom-elements.min',
     'proj4': 'libs/proj4js/dist/proj4-src',
-    'css': 'libs/require-css/css',
+    'css': 'libs/require-css/css'
   }
   //endinjector
   ,
