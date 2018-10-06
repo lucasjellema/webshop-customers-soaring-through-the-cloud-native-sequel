@@ -144,17 +144,20 @@ define(
                     contentType: 'application/json; charset=UTF-8',
 
                     success: function (msg, status, jqXHR) {
+                        console.log('succesfully logged in');
                         return true;
                     },
                     failure: function (textStatus, errorThrown) {
+                        console.error(errorThrown);
                         alert('Login Failed' + textStatus);
                         return false;
 
                     }
                 }).done(function (response) {
-                    //we are done saving
+                    console.log('profile saved '  + JSON.stringify(reponse));
 
                 }).fail(function (textStatus, errorThrown) {
+                    console.error(errorThrown);
                     alert('error updating: ' + JSON.stringify(textStatus));
 
                 });
