@@ -5,7 +5,7 @@ define(
         'use strict';
         function SignModel() {
             var self = this;
-            var customersMSAPIEndpoint = "http://oc-129-156-113-240.compute.oraclecloud.com:8011/customer"
+            var customersMSAPIEndpoint = "http://oc-129-156-113-240.compute.oraclecloud.com:8011/customer";
             //var customersMSAPIEndpoint = "http://localhost:8080/customer";
             //var apiKey = "73f1c312-64e1-4069-92d8-0179ac056e90"
 
@@ -55,7 +55,7 @@ define(
 
                 // make sure to create an empty customer object 
                 var rootViewModel = ko.dataFor(document.getElementById('globalBody'));
-                rootViewModel.initEmptyCustomer();
+               
                 // navigate to the module that allows us to sign up
                 console.log(oj.Router);
                 oj.Router.rootInstance.go('profile');
