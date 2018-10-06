@@ -17,7 +17,7 @@ define(
                 customer = {};
                 customer.addresses = [];
                 customer.paymentDetails = {};
-                cusstomer.preferences = {};
+                customer.preferences = {};
             }
                
             self.firstName = ko.observable(customer.firstName );
