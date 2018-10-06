@@ -44,6 +44,7 @@ define(
 
                 });
 
+               oj.Router.rootInstance.go('profile');
 
             };
          
@@ -52,7 +53,7 @@ define(
                     'username': self.username(),
                     'password': self.password()
                 };
-
+               
                 // make sure to create an empty customer object 
                 var rootViewModel = ko.dataFor(document.getElementById('globalBody'));
                
