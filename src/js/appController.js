@@ -39,7 +39,6 @@ define(['ojs/ojcore', 'knockout', 'ojs/ojknockout','ojs/ojrouter'],
         self.globalContext.customer = customer;
         self.userLogin(self.globalContext.customer.title + " " + self.globalContext.customer.firstName + " " + self.globalContext.customer.lastName);
         self.userLoggedIn("Y");
-        alert("logging in");
         var signinEvent = {
           "eventType": "userSignInEvent"
           , "source": "Customers Portlet"

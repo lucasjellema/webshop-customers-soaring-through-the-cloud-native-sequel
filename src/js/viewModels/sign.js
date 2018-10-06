@@ -35,7 +35,7 @@ define(
 
                     }
                 }).done(function (response) {
-                        // invoke doLogin on rootViewModel 
+
                         var rootViewModel = ko.dataFor(document.getElementById('globalBody'));
                         rootViewModel.doLogin(response);
 
