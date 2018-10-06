@@ -39,6 +39,7 @@ define(['ojs/ojcore', 'knockout', 'ojs/ojknockout','ojs/ojrouter'],
         self.globalContext.customer = customer;
         self.userLogin(self.globalContext.customer.title + " " + self.globalContext.customer.firstName + " " + self.globalContext.customer.lastName);
         self.userLoggedIn("Y");
+        alert("logging in");
         var signinEvent = {
           "eventType": "userSignInEvent"
           , "source": "Customers Portlet"
@@ -85,9 +86,13 @@ self.registerGlobalContextListener = function(listener) {
             this.console.log("Message from global context - username = " + un);
             if (un === "Not yet logged in" || un === "") {
               self.userLoggedIn("N");
-            } else { self.userLoggedIn("Y") }
+            } else { 
+                self.userLoggedIn("Y");
+            }
             //inform listeners of new global context
-            self.globalContextListeners.forEach(function(listene) {listener(self.globalContext)} ) 
+            self.globalContextListeners.forEach(function(listener){
+                listener(self.globalContext);
+            });
           }
         },
           false);
