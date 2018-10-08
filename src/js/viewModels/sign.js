@@ -11,29 +11,30 @@ define(
 
 
             self.username = ko.observable();
-            self.password = ko.observable();
+            self.password = ko.observable();  
             self.loginResult = ko.observable();
+            
+            
 
             self.loginButtonClick = function (event) {
-                console.log('self.username: ' + self.username());
-                console.log('self.password' + self.password());
                 var user = {
                     'username': self.username(),
                     'password': self.password()
                 };
 
-
-                return $.ajax({
+                    
+            return $.ajax({
                     type: 'POST',
                     url: customersMSAPIEndpoint + "/signin",
                     data: JSON.stringify(user),
                     contentType: 'application/json; charset=UTF-8',
+                    dataType: 'json',
 
-                    success: function (msg, status, jqXHR) {
+                    success: function (data) {
+                        console.log(data);
                         return true;
                     },
                     failure: function (textStatus, errorThrown) {
-                        self.loginResult = 'invalid username or password';
                         user = {};
                         self.username= '';
                         self.password = '';
@@ -41,19 +42,18 @@ define(
 
                     }
                 }).done(function (response) {
-
                         var rootViewModel = ko.dataFor(document.getElementById('globalBody'));
                         rootViewModel.doLogin(response);
-                         oj.Router.rootInstance.go('profile');
+                        oj.Router.rootInstance.go('profile');
 
                 }).fail(function (textStatus, errorThrown) {
-                    self.loginResult = 'invalid username or password';
+                    console.log(textStatus.responseText);
+                    alert(textStatus.responseText);
                 });
 
-              
-
             };
-         
+            
+            
             self.signUpLinkClick = function (event) {
                 var user = {
                     'username': self.username(),

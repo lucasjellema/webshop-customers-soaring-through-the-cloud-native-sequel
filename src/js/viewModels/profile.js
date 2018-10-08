@@ -12,7 +12,7 @@ define(
             
             var rootViewModel = ko.dataFor(document.getElementById('globalBody'));
             var customer = rootViewModel.globalContext.customer;
-            var signup =false;
+            self.signup =false;
             
             if(!customer){
                 self.signup = true;
@@ -40,6 +40,7 @@ define(
             var addressType = "BILLING";
             var streetName;
             var streetNumber;
+            var postcode;
             var city;
             var country;
             
@@ -49,6 +50,7 @@ define(
                     addressType = customer.addresses[0].type;
                     streetName = customer.addresses[0].streetName;
                     streetNumber = customer.addresses[0].streetNumber;
+                    postcode = customer.addresses[0].postcode;
                     city = customer.addresses[0].city;
                     country = customer.addresses[0].country;
                 }else{
@@ -61,6 +63,7 @@ define(
             self.streetName = ko.observable(streetName);
             self.streetNumber = ko.observable(streetNumber);
             self.city = ko.observable(city);
+            self.postcode = ko.observable(postcode);
             self.country = ko.observable(country);
   
             
@@ -101,6 +104,22 @@ define(
                     }
                 };
                 
+                if(customer.addresses){
+                    var addressBilling = {
+                        "type": self.addressType(),
+                        "streetName": self.streetName(),
+                        "streetNumber":self.streetNumber(),
+                        "city": self.city(),
+                        "postcode": self.postcode(),
+                        "country": self.country()
+                    };
+                    
+                    var addresses = [];
+                    addresses.push(addressBilling);
+                    updatedCustomer.addresses = addresses;
+                    //TODO add delivery address
+                }
+                
                  if(customer.paymentDetails){
                     var updatedPaymentDetail = {
                     "type": self.paymentType(),
@@ -114,6 +133,8 @@ define(
                     updatedCustomer.paymentDetails = details;
                 }
                 
+                //todo add phone numbers
+                
                 
                 
                 if(customer._id){
@@ -124,7 +145,8 @@ define(
                     data: JSON.stringify(updatedCustomer),
                     contentType: 'application/json; charset=UTF-8',
 
-                    success: function (msg, status, jqXHR) {
+                    success: function (data) {
+                        console.log(data);
                         return true;
                     },
                     failure: function (textStatus, errorThrown) {
@@ -133,10 +155,13 @@ define(
 
                     }
                 }).done(function (response) {
-                    //we are done saving
+                        console.log(response);
+                        alert('changes saved');
 
                 }).fail(function (textStatus, errorThrown) {
-                    alert('error updating: ' + JSON.stringify(textStatus));
+                    console.error(textStatus.responseText);
+                    console.error(errorThrown);
+                    alert(textStatus.repsonseText);
 
                 });
                 }
@@ -147,8 +172,8 @@ define(
                     data: JSON.stringify(updatedCustomer),
                     contentType: 'application/json; charset=UTF-8',
 
-                    success: function (msg, status, jqXHR) {
-                        self.result("Profile saved");
+                    success: function (data) {
+                        console.log(data);
                         return true;
                     },
                     failure: function (textStatus, errorThrown) {
@@ -158,8 +183,9 @@ define(
 
                     }
                 }).done(function (response) {
-                    console.log('profile saved '  + JSON.stringify(reponse));
-                    oj.Router.rootInstance.go('sign');
+                    
+                     console.log(response);
+                     alert('changes saved');
 
                 }).fail(function (textStatus, errorThrown) {
                     console.error(errorThrown);
