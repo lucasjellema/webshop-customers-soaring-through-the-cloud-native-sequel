@@ -7,12 +7,21 @@ define(
             
             var self = this;
             
-            var customersMSAPIEndpoint = "http://oc-129-156-113-240.compute.oraclecloud.com:8011/customer"
+            var customersMSAPIEndpoint = "http://oc-129-156-113-240.compute.oraclecloud.com:8011/customer";
             //var customersMSAPIEndpoint = "http://localhost:8080/customer";
             
             var rootViewModel = ko.dataFor(document.getElementById('globalBody'));
             var customer = rootViewModel.globalContext.customer;
-     
+            self.signup =false;
+            
+            if(!customer){
+                self.signup = true;
+                customer = {};
+                customer.addresses = [];
+                customer.paymentDetails = {};
+                customer.preferences = {};
+            }
+               
             self.firstName = ko.observable(customer.firstName );
             self.lastName = ko.observable(customer.lastName);
             self.title = ko.observable(customer.title);
@@ -31,6 +40,7 @@ define(
             var addressType = "BILLING";
             var streetName;
             var streetNumber;
+            var postcode;
             var city;
             var country;
             
@@ -40,8 +50,12 @@ define(
                     addressType = customer.addresses[0].type;
                     streetName = customer.addresses[0].streetName;
                     streetNumber = customer.addresses[0].streetNumber;
+                    postcode = customer.addresses[0].postcode;
                     city = customer.addresses[0].city;
                     country = customer.addresses[0].country;
+                }else{
+                    customer.addresses = {};
+                    
                 }
             }
             
@@ -49,6 +63,7 @@ define(
             self.streetName = ko.observable(streetName);
             self.streetNumber = ko.observable(streetNumber);
             self.city = ko.observable(city);
+            self.postcode = ko.observable(postcode);
             self.country = ko.observable(country);
   
             
@@ -89,6 +104,22 @@ define(
                     }
                 };
                 
+                if(customer.addresses){
+                    var addressBilling = {
+                        "type": self.addressType(),
+                        "streetName": self.streetName(),
+                        "streetNumber":self.streetNumber(),
+                        "city": self.city(),
+                        "postcode": self.postcode(),
+                        "country": self.country()
+                    };
+                    
+                    var addresses = [];
+                    addresses.push(addressBilling);
+                    updatedCustomer.addresses = addresses;
+                    //TODO add delivery address
+                }
+                
                  if(customer.paymentDetails){
                     var updatedPaymentDetail = {
                     "type": self.paymentType(),
@@ -102,31 +133,66 @@ define(
                     updatedCustomer.paymentDetails = details;
                 }
                 
+                //todo add phone numbers
                 
-                //TODO save the address and make it possible to add addresses
-
-                return $.ajax({
+                
+                
+                if(customer._id){
+                //update the profile
+                    return $.ajax({
                     type: 'PUT',
                     url: customersMSAPIEndpoint + "/profile/" + customer._id,
                     data: JSON.stringify(updatedCustomer),
                     contentType: 'application/json; charset=UTF-8',
 
-                    success: function (msg, status, jqXHR) {
+                    success: function (data) {
+                        console.log(data);
                         return true;
                     },
                     failure: function (textStatus, errorThrown) {
+                        alert('Update Failed' + textStatus);
+                        return false;
+
+                    }
+                }).done(function (response) {
+                        console.log(response);
+                        alert('changes saved');
+
+                }).fail(function (textStatus, errorThrown) {
+                    console.error(textStatus.responseText);
+                    console.error(errorThrown);
+                    alert(textStatus.repsonseText);
+
+                });
+                }
+                else{
+                    return $.ajax({
+                    type: 'POST',
+                    url: customersMSAPIEndpoint + "/profile/",
+                    data: JSON.stringify(updatedCustomer),
+                    contentType: 'application/json; charset=UTF-8',
+
+                    success: function (data) {
+                        console.log(data);
+                        return true;
+                    },
+                    failure: function (textStatus, errorThrown) {
+                        console.error(errorThrown);
                         alert('Login Failed' + textStatus);
                         return false;
 
                     }
                 }).done(function (response) {
-                    //we are done saving
+                    
+                     console.log(response);
+                     alert('changes saved');
 
                 }).fail(function (textStatus, errorThrown) {
+                    console.error(errorThrown);
                     alert('error updating: ' + JSON.stringify(textStatus));
 
                 });
-
+                }
             };
 
         }
