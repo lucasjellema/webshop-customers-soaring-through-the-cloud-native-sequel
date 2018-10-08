@@ -51,9 +51,12 @@
          ** on the JET website for more information on how to use this pattern.
       -->
       <div role="main" class="oj-web-applayout-max-width oj-web-applayout-content">
-          <div data-bind="ojModule:$root.userLoggedIn() =='N'?'sign':'profile'"/>           
+          <!--<div data-bind="ojModule:$root.userLoggedIn() =='N'?'sign':'profile'"/>-->  
+         <div  data-bind="ojModule: router.moduleConfig" />
       </div>
-    </div>
+                  
+
+      </div>
     
     <script type="text/javascript" src="js/libs/require/require.js"></script>
     <script type="text/javascript" src="js/main.js"></script>
