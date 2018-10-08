@@ -12,8 +12,11 @@ define(
 
             self.username = ko.observable();
             self.password = ko.observable();
+            self.loginResult = ko.observable();
 
             self.loginButtonClick = function (event) {
+                console.log('self.username: ' + self.username());
+                console.log('self.password' + self.password());
                 var user = {
                     'username': self.username(),
                     'password': self.password()
@@ -30,7 +33,10 @@ define(
                         return true;
                     },
                     failure: function (textStatus, errorThrown) {
-                        alert('Login Failed' + textStatus);
+                        self.loginResult = 'invalid username or password';
+                        user = {};
+                        self.username= '';
+                        self.password = '';
                         return false;
 
                     }
@@ -38,13 +44,13 @@ define(
 
                         var rootViewModel = ko.dataFor(document.getElementById('globalBody'));
                         rootViewModel.doLogin(response);
+                         oj.Router.rootInstance.go('profile');
 
                 }).fail(function (textStatus, errorThrown) {
-                    alert('error logging in: ' + JSON.stringify(textStatus));
-
+                    self.loginResult = 'invalid username or password';
                 });
 
-               oj.Router.rootInstance.go('profile');
+              
 
             };
          
@@ -54,11 +60,7 @@ define(
                     'password': self.password()
                 };
                
-                // make sure to create an empty customer object 
                 var rootViewModel = ko.dataFor(document.getElementById('globalBody'));
-               
-                // navigate to the module that allows us to sign up
-                console.log(oj.Router);
                 oj.Router.rootInstance.go('profile');
 
             };            

@@ -12,8 +12,10 @@ define(
             
             var rootViewModel = ko.dataFor(document.getElementById('globalBody'));
             var customer = rootViewModel.globalContext.customer;
+            var signup =false;
             
             if(!customer){
+                self.signup = true;
                 customer = {};
                 customer.addresses = [];
                 customer.paymentDetails = {};
@@ -49,6 +51,9 @@ define(
                     streetNumber = customer.addresses[0].streetNumber;
                     city = customer.addresses[0].city;
                     country = customer.addresses[0].country;
+                }else{
+                    customer.addresses = {};
+                    
                 }
             }
             
@@ -110,7 +115,6 @@ define(
                 }
                 
                 
-                //TODO save the address and make it possible to add addresses
                 
                 if(customer._id){
                 //update the profile
@@ -124,7 +128,7 @@ define(
                         return true;
                     },
                     failure: function (textStatus, errorThrown) {
-                        alert('Login Failed' + textStatus);
+                        alert('Update Failed' + textStatus);
                         return false;
 
                     }
@@ -144,7 +148,7 @@ define(
                     contentType: 'application/json; charset=UTF-8',
 
                     success: function (msg, status, jqXHR) {
-                        console.log('succesfully logged in');
+                        self.result("Profile saved");
                         return true;
                     },
                     failure: function (textStatus, errorThrown) {
@@ -155,6 +159,7 @@ define(
                     }
                 }).done(function (response) {
                     console.log('profile saved '  + JSON.stringify(reponse));
+                    oj.Router.rootInstance.go('sign');
 
                 }).fail(function (textStatus, errorThrown) {
                     console.error(errorThrown);
