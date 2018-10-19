@@ -3,11 +3,11 @@
   "version": "2.0.0",
   "description": "An Oracle JavaScript Extension Toolkit(JET) web app for customers microservice",
   "dependencies": {
-    "@oracle/oraclejet": "~4.1.0"
+    "@oracle/oraclejet": "~5.2.0"
   },
   "devDependencies": {
-    "@oracle/grunt-oraclejet": "~4.1.0",
-    "@oracle/oraclejet-tooling": "~4.1.0",
+    "@oracle/grunt-oraclejet": "~5.2.0",
+    "@oracle/oraclejet-tooling": "~5.2.0",
     "grunt": "^1.0.3",
     "load-grunt-config": "~0.19.2",
     "qunit-reporter-junit": "^1.1.1",
