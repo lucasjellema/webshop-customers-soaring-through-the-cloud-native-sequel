@@ -2,22 +2,30 @@
 <div class="oj-hybrid-padding">
     <h2>Sign in</h2>
     <div>
-      <oj-input-text id="login-result" value="{{loginResult}}" readOnly="true"></oj-input-text>
-      <oj-label for="username-input">Enter your username</oj-label>
-      <oj-input-text id="username-input" value="{{username}}"></oj-input-text>
-  
-      <br/>
-      <oj-label for="password">Enter your Password</oj-label>
-      <oj-input-password id="password" value="{{password}}">
-      </oj-input-password>
-      <br/>
-      <oj-button id='loginButton' on-click='[[loginButtonClick]]'>Login</oj-button>
-      
-      <h1> New account</h1>
-      <p>Not registered yet? Sign up now!</p>
+        <div class="demo-signin-form-container oj-hybrid-padding">
+            <form method="post" action="" name="signInForm">
+                <oj-input-text id="login-result" value="{{loginResult}}" readOnly="true"></oj-input-text>
+                <oj-label for="username-input">Enter your username</oj-label>
+                <oj-input-text id="username-input" spellcheck='false' autocorrect='off' autocapitalize=off aria-label='User Name' value='{{username}}' required='true'>></oj-input-text>
 
-      <oj-button id='signUp' on-click='[[signUpLinkClick]]'>Sign Up</oj-button>
+                <br/>
+                <oj-label for="password">Enter your Password</oj-label>
+                <oj-input-password id="password" value="{{password}}" placeholder='Password' required='true'>>
+                </oj-input-password>
+                <br/>
 
-      
+
+            </form>
+            <div class="oj-hybrid-padding-top">
+                <oj-button id='loginButton' on-click='[[loginButtonClick]]'>Login</oj-button>
+            </div>
+
+            <h1> New account</h1>
+            <p>Not registered yet? Sign up now!</p>
+        </div>
+
+        <oj-button id='signUp' on-click='[[signUpLinkClick]]'>Sign Up</oj-button>
+
+
     </div>
-  </div>
+</div>
