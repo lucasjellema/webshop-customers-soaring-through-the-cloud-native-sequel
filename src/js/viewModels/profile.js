@@ -184,7 +184,7 @@ define(
                     customer.paymentDetails = {};
                     customer.preferences = {};
                     
-                }
+                };
 
                 self.saveProfile = function (event) {
 
