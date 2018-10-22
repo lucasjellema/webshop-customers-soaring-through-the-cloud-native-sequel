@@ -13,9 +13,8 @@ define(
             self.username = ko.observable();
             self.password = ko.observable();  
             self.loginResult = ko.observable();
+            self.customer;
             
-            
-
             self.loginButtonClick = function (event) {
                 var user = {
                     'username': self.username(),
@@ -32,6 +31,7 @@ define(
 
                     success: function (data) {
                         console.log(data);
+                        window.sessionStorage.customer = data;
                         return true;
                     },
                     failure: function (textStatus, errorThrown) {
@@ -44,6 +44,7 @@ define(
                 }).done(function (response) {
                         var rootViewModel = ko.dataFor(document.getElementById('globalBody'));
                         rootViewModel.doLogin(response);
+                        window.sessionStorage.userLoggedIn = true;
                         oj.Router.rootInstance.go('profile');
 
                 }).fail(function (textStatus, errorThrown) {
@@ -60,7 +61,6 @@ define(
                     'password': self.password()
                 };
                
-                var rootViewModel = ko.dataFor(document.getElementById('globalBody'));
                 oj.Router.rootInstance.go('profile');
 
             };            

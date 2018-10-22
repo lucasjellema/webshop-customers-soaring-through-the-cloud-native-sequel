@@ -53,7 +53,7 @@ requirejs.config(
  */
 require(['ojs/ojcore', 'knockout', 'appController', 'ojs/ojknockout', 'ojs/ojbutton', 'ojs/ojtoolbar', 'ojs/ojmenu','ojs/ojmodule'],
   function (oj, ko, app) { // this callback gets executed when all required modules are loaded
-    
+     
     $(function() {
       
       function init() {

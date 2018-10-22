@@ -1,184 +1,189 @@
-<h2>Your profile <span data-bind="text: $root.userLogin"></span></h2>
+<h2>Your profile</h2>
 <div class="oj-hybrid-padding">
     <h1>Enter profile information</h1>
     <oj-button id='save' on-click='[[saveProfile]]'>Save</oj-button>
+    <oj-button id='signUp' on-click='[[signUp]]'>Sign up </oj-button>
 
     <div id="sampleDemo" style="" class="demo-padding demo-container">
         <div id="componentDemoContent" style="width: 1px; min-width: 100%;">
-            <div class="oj-flex oj-form-layout oj-sm-only-flex-direction-column oj-md-only-flex-direction-column oj-lg-flex-items-1 " id="form-container">  
-                <div class="oj-flex-item"> 
-                    <div class="oj-form oj-sm-odd-cols-12 oj-md-odd-cols-4 oj-md-labels-inline oj-form-no-dividers"> 
-                        <h3 class="oj-header-border">Personal details</h3>
-                          <div class="oj-flex">  
-                            <div class="oj-flex-item">
-                                <oj-label for="Title">Title</oj-label>
-                            </div>
-                            <div class="oj-flex-item">
+                <div class="oj-flex oj-form-layout oj-sm-only-flex-direction-column oj-md-only-flex-direction-column oj-lg-flex-items-1 " id="form-container">  
 
-                                <oj-select-one id="Title" value="{{title}}" style="max-width:20em">
-                                    <oj-option value="Mr">Mister</oj-option>
-                                    <oj-option value="Mrs">Mrs</oj-option>
-                                    <oj-option value="Ms">Ms</oj-option>
-                                    <oj-option value="Miss">Miss</oj-option>
-                                </oj-select-one>
 
-                            </div>
-                        </div>
-                        <div class="oj-flex">  
-                            <div class="oj-flex-item">
-                                <oj-label for="firstName">First Name</oj-label>
-                            </div>
-                            <div class="oj-flex-item">
-                                <oj-input-text id="firstName" value="{{firstName}}"></oj-input-text>
-                            </div>
-                        </div>
-                        <div class="oj-flex">  
-                            <div class="oj-flex-item">
-                                <oj-label for="lastName">Last Name</oj-label>
-                            </div>
-                            <div class="oj-flex-item">
-                                <oj-input-text id="lastName" value="{{lastName}}"></oj-input-text>
-                            </div>
-                        </div>
-                        <div class="oj-flex">  
-                            <div class="oj-flex-item">
-                                <oj-label for="Email">Username (Email)</oj-label>
-                            </div>
-                            <div class="oj-flex-item">
-                                <oj-input-text id="Email" value="{{email}}"></oj-input-text>
-                            </div>
-                        </div>
-                        <div class="oj-flex">  
-                            <div class="oj-flex-item">
-                                <oj-label for="Password">Password</oj-label>
-                            </div>
-                            <div class="oj-flex-item">
-                                <oj-input-password id="Password" value="{{password}}" readOnly={{!signup}}></oj-input-password>
-                            </div>
-                        </div>
-                        <div class="oj-flex">  
-                            <div class="oj-flex-item">
-                                <oj-label for="DateOfBirth">Date of Birth</oj-label>
-                            </div>
-                            <div class="oj-flex-item">
-                                <oj-input-date id="DateOfBirth" value="{{dateOfBirth}}"></oj-input-date>
-                            </div>
-                        </div> 
-                        <h3 class="oj-header-border">Addresses</h3>
-                        
-                        <div class="oj-flex"> 
-                            <div class="oj-flex-item">
-                                <oj-label for="type">Type</oj-label>
-                            </div>
-                             <div class="oj-flex-item">
 
-                                <oj-select-one id="type" value="{{addressType}}" style="max-width:20em">
-                                    <oj-option value="BILLING">Billing</oj-option>
-                                    <oj-option value="DELIVERY">Delivery</oj-option>
-                             
-                                </oj-select-one>
+                    <div class="oj-flex-item"> 
+                        <div class="oj-form oj-sm-odd-cols-12 oj-md-odd-cols-4 oj-md-labels-inline oj-form-no-dividers"> 
+                            <h3 class="oj-header-border">Personal details</h3>
+                            <div class="oj-flex">  
+                                <div class="oj-flex-item">
+                                    <oj-label for="Title">Title</oj-label>
+                                </div>
+                                <div class="oj-flex-item">
 
-                            </div>
-                        </div>
-                        <div class="oj-flex"> 
-                            <div class="oj-flex-item">
-                                <oj-label for="streetName">Street Name</oj-label>
-                            </div>
-                            <div class="oj-flex-item">
-                                <oj-input-text id="streetName" value="{{streetName}}"></oj-input-text>
-                            </div>
-                        </div>
-                        <div class="oj-flex"> 
-                            <div class="oj-flex-item">
-                                <oj-label for="streetNumber">Street Number</oj-label>
-                            </div>
-                            <div class="oj-flex-item">
-                                <oj-input-text id="streetNumber" value="{{streetNumber}}"></oj-input-text>
-                            </div>
-                        </div>
-                 <div class="oj-flex"> 
-                            <div class="oj-flex-item">
-                                <oj-label for="city">City</oj-label>
-                            </div>
-                            <div class="oj-flex-item">
-                                <oj-input-text id="streetName" value="{{city}}"></oj-input-text>
-                            </div>
-                        </div>
-                         <div class="oj-flex"> 
-                            <div class="oj-flex-item">
-                                <oj-label for="zipcode">Zipcode / Postcode</oj-label>
-                            </div>
-                            <div class="oj-flex-item">
-                                <oj-input-text id="streetName" value="{{postcode}}"></oj-input-text>
-                            </div>
-                        </div>
-                 <div class="oj-flex"> 
-                            <div class="oj-flex-item">
-                                <oj-label for="country">Country</oj-label>
-                            </div>
-                            <div class="oj-flex-item">
-                                <oj-input-text id="country" value="{{country}}"></oj-input-text>
-                            </div>
-                        </div>
-                    </div>
-                </div>             
-                <div class="oj-flex-item"> 
-                    <div class="oj-form oj-sm-odd-cols-12 oj-md-odd-cols-4 oj-md-labels-inline oj-form-no-dividers"> 
-                        <h3 class="oj-header-border">Payment Details</h3>
-                        
-                        <div class="oj-flex"> 
-                            <div class="oj-flex-item">
-                                <oj-label for="type">Type</oj-label>
-                            </div>
-                              <div class="oj-flex-item">
+                                    <oj-select-one id="Title" value="{{title}}" style="max-width:20em">
+                                        <oj-option value="Mr">Mister</oj-option>
+                                        <oj-option value="Mrs">Mrs</oj-option>
+                                        <oj-option value="Ms">Ms</oj-option>
+                                        <oj-option value="Miss">Miss</oj-option>
+                                    </oj-select-one>
 
-                                <oj-select-one id="type" value="{{paymentType}}" style="max-width:20em">
-                                    <oj-option value="CREDIT">Credit card</oj-option>
-                                    <oj-option value="DEBIT">Paypall</oj-option>
-                             
-                                </oj-select-one>
+                                </div>
+                            </div>
+                            <div class="oj-flex">  
+                                <div class="oj-flex-item">
+                                    <oj-label for="firstName">First Name</oj-label>
+                                </div>
+                                <div class="oj-flex-item">
+                                    <oj-input-text id="firstName" value="{{firstName}}"></oj-input-text>
+                                </div>
+                            </div>
+                            <div class="oj-flex">  
+                                <div class="oj-flex-item">
+                                    <oj-label for="lastName">Last Name</oj-label>
+                                </div>
+                                <div class="oj-flex-item">
+                                    <oj-input-text id="lastName" value="{{lastName}}"></oj-input-text>
+                                </div>
+                            </div>
+                            <div class="oj-flex">  
+                                <div class="oj-flex-item">
+                                    <oj-label for="Email">Username (Email)</oj-label>
+                                </div>
+                                <div class="oj-flex-item">
+                                    <oj-input-text id="Email" value="{{email}}"></oj-input-text>
+                                </div>
+                            </div>
+                            <div class="oj-flex">  
+                                <div class="oj-flex-item">
+                                    <oj-label for="Password">Password</oj-label>
+                                </div>
+                                <div class="oj-flex-item">
+                                    <oj-input-password id="Password" value="{{password}}" readOnly={{!signup}}></oj-input-password>
+                                </div>
+                            </div>
+                            <div class="oj-flex">  
+                                <div class="oj-flex-item">
+                                    <oj-label for="DateOfBirth">Date of Birth</oj-label>
+                                </div>
+                                <div class="oj-flex-item">
+                                    <oj-input-date id="DateOfBirth" value="{{dateOfBirth}}"></oj-input-date>
+                                </div>
+                            </div> 
+                            <h3 class="oj-header-border">Addresses</h3>
 
+                            <div class="oj-flex"> 
+                                <div class="oj-flex-item">
+                                    <oj-label for="type">Type</oj-label>
+                                </div>
+                                <div class="oj-flex-item">
+
+                                    <oj-select-one id="type" value="{{addressType}}" style="max-width:20em">
+                                        <oj-option value="BILLING">Billing</oj-option>
+                                        <oj-option value="DELIVERY">Delivery</oj-option>
+
+                                    </oj-select-one>
+
+                                </div>
+                            </div>
+                            <div class="oj-flex"> 
+                                <div class="oj-flex-item">
+                                    <oj-label for="streetName">Street Name</oj-label>
+                                </div>
+                                <div class="oj-flex-item">
+                                    <oj-input-text id="streetName" value="{{streetName}}"></oj-input-text>
+                                </div>
+                            </div>
+                            <div class="oj-flex"> 
+                                <div class="oj-flex-item">
+                                    <oj-label for="streetNumber">Street Number</oj-label>
+                                </div>
+                                <div class="oj-flex-item">
+                                    <oj-input-text id="streetNumber" value="{{streetNumber}}"></oj-input-text>
+                                </div>
+                            </div>
+                            <div class="oj-flex"> 
+                                <div class="oj-flex-item">
+                                    <oj-label for="city">City</oj-label>
+                                </div>
+                                <div class="oj-flex-item">
+                                    <oj-input-text id="city" value="{{city}}"></oj-input-text>
+                                </div>
+                            </div>
+                            <div class="oj-flex"> 
+                                <div class="oj-flex-item">
+                                    <oj-label for="zipcode">Zipcode / Postcode</oj-label>
+                                </div>
+                                <div class="oj-flex-item">
+                                    <oj-input-text id="zipcode" value="{{postcode}}"></oj-input-text>
+                                </div>
+                            </div>
+                            <div class="oj-flex"> 
+                                <div class="oj-flex-item">
+                                    <oj-label for="country">Country</oj-label>
+                                </div>
+                                <div class="oj-flex-item">
+                                    <oj-input-text id="country" value="{{country}}"></oj-input-text>
+                                </div>
                             </div>
                         </div>
-                        <div class="oj-flex"> 
-                            <div class="oj-flex-item">
-                                <oj-label for="cardnumber">Card Number</oj-label>
+                    </div>             
+                    <div class="oj-flex-item"> 
+                        <div class="oj-form oj-sm-odd-cols-12 oj-md-odd-cols-4 oj-md-labels-inline oj-form-no-dividers"> 
+                            <h3 class="oj-header-border">Payment Details</h3>
+
+                            <div class="oj-flex"> 
+                                <div class="oj-flex-item">
+                                    <oj-label for="type">Type</oj-label>
+                                </div>
+                                <div class="oj-flex-item">
+
+                                    <oj-select-one id="type" value="{{paymentType}}" style="max-width:20em">
+                                        <oj-option value="CREDIT">Credit card</oj-option>
+                                        <oj-option value="DEBIT">Paypall</oj-option>
+
+                                    </oj-select-one>
+
+                                </div>
                             </div>
-                            <div class="oj-flex-item">
-                                <oj-input-text id="cardnumber" value="{{cardNumber}}"></oj-input-text>
+                            <div class="oj-flex"> 
+                                <div class="oj-flex-item">
+                                    <oj-label for="cardnumber">Card Number</oj-label>
+                                </div>
+                                <div class="oj-flex-item">
+                                    <oj-input-text id="cardnumber" value="{{cardNumber}}"></oj-input-text>
+                                </div>
                             </div>
-                        </div>
-                        <div class="oj-flex"> 
-                            <div class="oj-flex-item">
-                                <oj-label for="expirationDate">Expiration date (MM-YY)</oj-label>
+                            <div class="oj-flex"> 
+                                <div class="oj-flex-item">
+                                    <oj-label for="expirationDate">Expiration date (MM-YY)</oj-label>
+                                </div>
+                                <div class="oj-flex-item">
+                                    <oj-input-text id="expirationDate" value="{{expirationDate}}"></oj-input-text>
+                                </div>
                             </div>
-                            <div class="oj-flex-item">
-                                <oj-input-text id="expirationDate" value="{{expirationDate}}"></oj-input-text>
+                            <div class="oj-flex"> 
+                                <div class="oj-flex-item">
+                                    <oj-label for="nameOnCard">Name on Card</oj-label>
+                                </div>
+                                <div class="oj-flex-item">
+                                    <oj-input-text id="nameOnCard" value="{{nameOnCard}}"></oj-input-text>
+                                </div>
                             </div>
-                        </div>
-                        <div class="oj-flex"> 
-                            <div class="oj-flex-item">
-                                <oj-label for="nameOnCard">Name on Card</oj-label>
+                            <h3 class="oj-header-border">Preferences</h3>
+                            <div class="oj-flex"> 
+                                <div class="oj-flex-item">
+                                    <oj-label for="Newsletter">Newsletter</oj-label>
+                                </div>
+                                <div class="oj-flex-item">
+                                    <oj-switch id="switch" value="{{newsLetter}}"></oj-switch>
+                                </div>
                             </div>
-                            <div class="oj-flex-item">
-                                <oj-input-text id="nameOnCard" value="{{nameOnCard}}"></oj-input-text>
-                            </div>
-                        </div>
-                        <h3 class="oj-header-border">Preferences</h3>
-                        <div class="oj-flex"> 
-                            <div class="oj-flex-item">
-                                <oj-label for="Newsletter">Newsletter</oj-label>
-                            </div>
-                            <div class="oj-flex-item">
-                                <oj-switch id="switch" value="{{newsLetter}}"></oj-switch>
-                        </div>
-                        </div>
-                        <div class="oj-flex"> 
-                            <div class="oj-flex-item">
-                                <oj-label for="Offers">offers</oj-label>
-                            </div>
-                            <div class="oj-flex-item">
-                                <oj-switch id="Offers" value="{{offers}}"></oj-switch>
+                            <div class="oj-flex"> 
+                                <div class="oj-flex-item">
+                                    <oj-label for="Offers">offers</oj-label>
+                                </div>
+                                <div class="oj-flex-item">
+                                    <oj-switch id="Offers" value="{{offer}}"></oj-switch>
+                                </div>
                             </div>
                         </div>
                     </div>
