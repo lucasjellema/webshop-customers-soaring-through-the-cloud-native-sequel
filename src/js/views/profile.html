@@ -1,5 +1,5 @@
 
-    
+   <form method="post" action="" name="signUpForm">    
       <div id='buttons-container'>
                 <button class="oj-button-primary" data-bind="click: saveProfile,
                    ojComponent: {
@@ -83,7 +83,7 @@
                                     <oj-label for="Password">Password</oj-label>
                                 </div>
                                 <div class="oj-flex-item">
-                                    <oj-input-password id="Password" value="{{password}}" readOnly={{!signup}}></oj-input-password>
+                                    <oj-input-password id="Password" autocomplete='off' value="{{password}}" readOnly={{!signup}}></oj-input-password>
                                 </div>
                             </div>
                             <div class="oj-flex">  
@@ -216,4 +216,4 @@
                 </div>
             </div>
         </div>
-    </div>
+   </form>

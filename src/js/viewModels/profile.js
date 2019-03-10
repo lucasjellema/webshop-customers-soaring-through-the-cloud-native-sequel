@@ -85,7 +85,6 @@ define(
 
                 self.getUserProfile = function () {
                     return new Promise(function (resolve, reject) {
-                        console.log("getting the user profile");
                         data.getUserProfile(self.id).then(function (response) {
                             console.log('response: ' + JSON.stringify(response));
                             processUserProfile(response, resolve, reject);
@@ -97,9 +96,6 @@ define(
                 };
 
                 function processUserProfile(response, resolve, reject) {
-                    console.log("response in processUserProfile: " + JSON.stringify(response));
-                    //var result = JSON.parse(response);
-                    //
                     var result = response;
                     if (result) {
                         customer = result;
@@ -113,8 +109,6 @@ define(
                 }
 
                 function mapCustomer(customer) {
-                    console.log("in MapCustomer");
-                    console.log('customer: ' + JSON.stringify(customer));
                     self.firstName(customer.firstName);
                     self.lastName(customer.lastName);
                     self.title(customer.title);
@@ -166,13 +160,19 @@ define(
                 ;
 
                 if (self.signup) {
+                    console.log('in signup, clearing form');
+                    
+                    var form = document.getElementById('signUpForm');
+                    form.reset();
                     customer = {};
                     customer.addresses = [];
                     customer.paymentDetails = {};
                     customer.preferences = {};
+                    
                 }
                 
                 self.signIn = function(event){
+                    app.doLogout();
                     console.log('user clicked sign in');
                     app.router.go('sign');
                 };
@@ -180,6 +180,10 @@ define(
 
 
                 self.signUp = function(event){
+                    console.log('in signup, clearing form');
+//                    var form = document.getElementById('signUpForm');
+//                    form.reset();
+                    customer = {};
                     window.sessionStorage.customer = {};
                     customer = {};
                     customer.addresses = [];
@@ -189,18 +193,11 @@ define(
                 };
                 
                 self.signOut = function(event){
-                     window.sessionStorage.customer = {};
-                    customer = {};
-                    customer.addresses = [];
-                    customer.paymentDetails = {};
-                    customer.preferences = {};
-                    window.sessionStorage.user = {};
+                    app.doLogout();
                     app.router.go('sign');
-                }
+                };
 
                 self.saveProfile = function (event) {
-
-
                     var updatedCustomer = {
                         "firstName": self.firstName(),
                         "lastName": self.lastName(),

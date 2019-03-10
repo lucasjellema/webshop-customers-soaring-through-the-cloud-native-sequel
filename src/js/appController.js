@@ -73,6 +73,24 @@ define(['ojs/ojcore', 'knockout', 'ojs/ojknockout', 'ojs/ojrouter', 'ojs/ojmodul
 
                 };
                 
+                  self.doLogout = function(){
+                    self.globalContext.customer = {};
+                    self.userLoggedIn("N");
+                    window.sessionStorage.userLoggedIn = false;
+                    window.sessionStorage.profileId = null;
+                    self.globalContext.username=null;
+                    self.globalContext.userLoggedIn="N";
+                    var signOutEvent = {
+                         "eventType": "userSignOutEvent"
+                        , "source": "Customers Portlet"
+                        , "payload": {
+                            "username": "",
+                            "customer": ""
+                        }
+                    };
+                    self.callParent(signOutEvent)
+                    };
+                
 
 
                 // this function will communicate an event with the parent window
