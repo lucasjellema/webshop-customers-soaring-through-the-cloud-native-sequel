@@ -1,9 +1,35 @@
-<h2>Your profile</h2>
-<div class="oj-hybrid-padding">
-    <h1>Enter profile information</h1>
-    <oj-button id='save' on-click='[[saveProfile]]'>Save</oj-button>
-    <oj-button id='signUp' on-click='[[signUp]]'>Sign up </oj-button>
 
+    
+      <div id='buttons-container'>
+                <button class="oj-button-primary" data-bind="click: saveProfile,
+                   ojComponent: {
+                       component: 'ojButton',
+                       label: 'Save'
+                   }">
+                </button>
+                <button class="oj-button-primary" data-bind="click: signUp,
+                   ojComponent: {
+                       component: 'ojButton',
+                       label: 'Sign Up'
+                   }">
+                </button>
+       
+                <button class="oj-button-primary" data-bind="click: signIn,
+                   ojComponent: {
+                       component: 'ojButton',
+                       label: 'Sign in'
+                   }">
+                </button>
+    
+                <button class="oj-button-primary" data-bind="click: signOut,
+                   ojComponent: {
+                       component: 'ojButton',
+                       label: 'Sign out'
+                   }">
+                </button>
+      </div>
+
+    <h1>Enter profile information</h1>
     <div id="sampleDemo" style="" class="demo-padding demo-container">
         <div id="componentDemoContent" style="width: 1px; min-width: 100%;">
                 <div class="oj-flex oj-form-layout oj-sm-only-flex-direction-column oj-md-only-flex-direction-column oj-lg-flex-items-1 " id="form-container">  

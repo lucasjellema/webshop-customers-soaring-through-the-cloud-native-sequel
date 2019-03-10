@@ -1,7 +1,7 @@
 define(
-        ['ojs/ojcore', 'knockout', 'dataService', 'jquery', 'ojs/ojinputtext', 'ojs/ojbutton', 'ojs/ojdatetimepicker', 'ojs/ojlabel', 'ojs/ojselectcombobox', 'ojs/ojswitch'
+        ['ojs/ojcore', 'knockout', 'dataService','appController','jquery', 'ojs/ojinputtext', 'ojs/ojbutton', 'ojs/ojdatetimepicker', 'ojs/ojlabel', 'ojs/ojselectcombobox', 'ojs/ojswitch'
         ],
-        function (oj, ko, data, $) {
+        function (oj, ko, data, app, $) {
             'use strict';
 
             function ProfileModel() {
@@ -155,11 +155,8 @@ define(
                 }
                 ;
 
-                var customersMSAPIEndpoint = "http://oc-129-156-113-240.compute.oraclecloud.com:8011/customer";
+               var customersMSAPIEndpoint = "http://129.213.126.223:8011/customer";
                 //var customersMSAPIEndpoint = "http://localhost:8080/customer";
-
-
-
 
 
                 if (!self.signup) {
@@ -174,17 +171,32 @@ define(
                     customer.paymentDetails = {};
                     customer.preferences = {};
                 }
+                
+                self.signIn = function(event){
+                    console.log('user clicked sign in');
+                    app.router.go('sign');
+                };
 
 
 
                 self.signUp = function(event){
                     window.sessionStorage.customer = {};
-                     customer = {};
+                    customer = {};
                     customer.addresses = [];
                     customer.paymentDetails = {};
                     customer.preferences = {};
                     
                 };
+                
+                self.signOut = function(event){
+                     window.sessionStorage.customer = {};
+                    customer = {};
+                    customer.addresses = [];
+                    customer.paymentDetails = {};
+                    customer.preferences = {};
+                    window.sessionStorage.user = {};
+                    app.router.go('sign');
+                }
 
                 self.saveProfile = function (event) {
 

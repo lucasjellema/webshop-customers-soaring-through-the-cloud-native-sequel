@@ -7,7 +7,7 @@
 'use strict';
 define(['jquery'], function ($) {
 
-    var customersMSAPIEndpoint = "http://oc-129-156-113-240.compute.oraclecloud.com:8011/customer";
+    var customersMSAPIEndpoint = "http://129.213.126.223:8011/customer/";
     //var customersMSAPIEndpoint = "http://localhost:8080/customer";
     //var apiKey = "73f1c312-64e1-4069-92d8-0179ac056e90"
 

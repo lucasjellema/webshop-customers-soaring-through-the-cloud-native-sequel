@@ -4,27 +4,35 @@
     <div>
         <div class="demo-signin-form-container oj-hybrid-padding">
             <form method="post" action="" name="signInForm">
-                <oj-input-text id="login-result" value="{{loginResult}}" readOnly="true"></oj-input-text>
-                <oj-label for="username-input">Enter your username</oj-label>
-                <oj-input-text id="username-input" spellcheck='false' autocorrect='off' autocapitalize=off aria-label='User Name' value='{{username}}' required='true'>></oj-input-text>
-
+                <!--oj-input-text id="login-result" value="{{loginResult}}" readOnly="true"></oj-input-text>
+                <oj-label for="username-input">Enter your username</oj-label-->
+                <oj-input-text id="username-input" placeholder='User name' spellcheck='false' autocorrect='off' autocapitalize=off aria-label='User Name' value='{{username}}' required='true'></oj-input-text>
                 <br/>
-                <oj-label for="password">Enter your Password</oj-label>
-                <oj-input-password id="password" value="{{password}}" placeholder='Password' required='true'>>
-                </oj-input-password>
+                <oj-input-password id="password" placeholder='Password' autocomplete='off' value="{{password}}" placeholder='Password' required='true'></oj-input-password>
                 <br/>
-
-
-            </form>
             <div class="oj-hybrid-padding-top">
-                <oj-button id='loginButton' on-click='[[loginButtonClick]]'>Login</oj-button>
+                <button class="oj-button-primary" data-bind="click: loginButtonClick,
+                   ojComponent: {
+                       component: 'ojButton',
+                       label: 'Login'
+                   }">
+                </button>
             </div>
+                </form>
+
 
             <h1> New account</h1>
             <p>Not registered yet? Sign up now!</p>
         </div>
 
-        <oj-button id='signUp' on-click='[[signUpLinkClick]]'>Sign Up</oj-button>
+         <div class="oj-hybrid-padding-top">
+                <button class="oj-button-primary" data-bind="click: signUpLinkClick,
+                   ojComponent: {
+                       component: 'ojButton',
+                       label: 'Sign Up'
+                   }">
+                </button>
+         </div>
 
 
     </div>

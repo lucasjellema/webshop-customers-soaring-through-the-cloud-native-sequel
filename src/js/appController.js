@@ -5,7 +5,7 @@
 /*
  * Your application specific code will go here
  */
-define(['ojs/ojcore', 'knockout', 'ojs/ojknockout', 'ojs/ojrouter'],
+define(['ojs/ojcore', 'knockout', 'ojs/ojknockout', 'ojs/ojrouter', 'ojs/ojmoduleanimations'],
         function (oj, ko) {
 
             
@@ -13,7 +13,7 @@ define(['ojs/ojcore', 'knockout', 'ojs/ojknockout', 'ojs/ojrouter'],
             var router = oj.Router.rootInstance;
             router.configure({
                 'profile': {label: 'Profile'},
-                'sign': {label: 'Sign'}
+                'sign': {label: 'Sign', isDefault: true}
             });
 
             function ControllerViewModel() {
@@ -21,6 +21,21 @@ define(['ojs/ojcore', 'knockout', 'ojs/ojknockout', 'ojs/ojrouter'],
                 self.globalContext = {};
 
                 self.router = router;
+                
+                 self.pendingAnimationType = null;
+
+                function switcherCallback(context) {
+                    return self.pendingAnimationType;
+                }
+
+                function mergeConfig(original) {
+                    return $.extend(true, {}, original, {
+                        'animation': oj.ModuleAnimations.switcher(switcherCallback),
+                        'cacheKey': self.router.currentValue()
+                    });
+                }
+
+                self.moduleConfig = mergeConfig(self.router.moduleConfig);
 
                 $(document).ready(function () {
                     self.init();
