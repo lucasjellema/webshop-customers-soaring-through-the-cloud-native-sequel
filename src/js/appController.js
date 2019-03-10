@@ -125,7 +125,7 @@ define(['ojs/ojcore', 'knockout', 'ojs/ojknockout', 'ojs/ojrouter', 'ojs/ojmodul
                             self.globalContext = event.data.payload.globalContext;                       
                             if (self.globalContext.customer) {
                                 self.userLogin(self.globalContext.customer.title + " " + self.globalContext.customer.firstName + " " + self.globalContext.customer.lastName);
-                                un = self.globaConext.customer.email;
+                                un = self.globaContext.customer.email;
                             }
                             ;
                             this.console.log("Message from global context - username = " + un);
