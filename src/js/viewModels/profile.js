@@ -173,7 +173,6 @@ define(
                 
                 self.signIn = function(event){
                     app.doLogout();
-                    console.log('user clicked sign in');
                     app.router.go('sign');
                 };
 
@@ -181,8 +180,6 @@ define(
 
                 self.signUp = function(event){
                     console.log('in signup, clearing form');
-//                    var form = document.getElementById('signUpForm');
-//                    form.reset();
                     customer = {};
                     window.sessionStorage.customer = {};
                     customer = {};

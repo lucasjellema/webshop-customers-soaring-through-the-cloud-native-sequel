@@ -13,7 +13,7 @@ define(['ojs/ojcore', 'knockout', 'ojs/ojknockout', 'ojs/ojrouter', 'ojs/ojmodul
             var router = oj.Router.rootInstance;
             router.configure({
                 'profile': {label: 'Profile'},
-                'sign': {label: 'Sign', isDefault: true}
+                'sign': {label: 'Sign'}
             });
 
             function ControllerViewModel() {
@@ -22,21 +22,6 @@ define(['ojs/ojcore', 'knockout', 'ojs/ojknockout', 'ojs/ojrouter', 'ojs/ojmodul
 
                 self.router = router;
                 
-                 self.pendingAnimationType = null;
-
-                function switcherCallback(context) {
-                    return self.pendingAnimationType;
-                }
-
-                function mergeConfig(original) {
-                    return $.extend(true, {}, original, {
-                        'animation': oj.ModuleAnimations.switcher(switcherCallback),
-                        'cacheKey': self.router.currentValue()
-                    });
-                }
-
-                self.moduleConfig = mergeConfig(self.router.moduleConfig);
-
                 $(document).ready(function () {
                     self.init();
                 });
