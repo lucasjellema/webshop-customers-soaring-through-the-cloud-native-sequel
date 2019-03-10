@@ -161,9 +161,6 @@ define(
 
                 if (self.signup) {
                     console.log('in signup, clearing form');
-                    
-                    var form = document.getElementById('signUpForm');
-                    form.reset();
                     customer = {};
                     customer.addresses = [];
                     customer.paymentDetails = {};
