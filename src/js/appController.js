@@ -102,10 +102,9 @@ define(['ojs/ojcore', 'knockout', 'ojs/ojknockout', 'ojs/ojrouter', 'ojs/ojmodul
                             self.globalContext = event.data.payload.globalContext;                       
                             if (self.globalContext.customer) {
                                 self.userLogin(self.globalContext.customer.title + " " + self.globalContext.customer.firstName + " " + self.globalContext.customer.lastName);
-                                username = self.globaContext.customer.email;
+                                username = self.globalContext.customer.email;
                             }
                             ;
-                            this.console.log("customer ms **Message from global context - username = " + username);
                             if (!username || username === "Not yet logged in" || username=== "") {
                                 self.userLoggedIn("N");
                             } else {
