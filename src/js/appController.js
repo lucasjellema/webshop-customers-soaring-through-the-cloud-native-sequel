@@ -82,7 +82,7 @@ define(['ojs/ojcore', 'knockout', 'ojs/ojknockout', 'ojs/ojrouter', 'ojs/ojmodul
                 // typically used for applications that run inside an IFRAME to inform the
                 // embedding application about what is going on.      
                 self.callParent = function (message) {
-                    console.log('send message from Customers to parent window');
+                    console.log('customer ms ** send message from Customers to parent window');
                     // here we can restrict which parent page can receive our message
                     // by specifying the origin that this page should have
                     var targetOrigin = '*';
@@ -99,22 +99,22 @@ define(['ojs/ojcore', 'knockout', 'ojs/ojknockout', 'ojs/ojrouter', 'ojs/ojmodul
                     // listener for events posted on the window;
                     // used for applications running insidean IFRAME to receive events from the
                     // embedding application
-                    console.log('in init appcontroler');
-                     var un = self.globalContext.userName;
-                     console.log('self.globalConext.userName = ' + self.globalContext.userName);
-                     console.log('window.sessionStorage.userLoggedIn: ' + window.sessionStorage.userLoggedIn);
+                    console.log('customer ms ** in init appcontroler');
+                     var username = self.globalContext.userName;
+                     console.log('customer ms ** self.globalConext.userName = ' + self.globalContext.userName);
+                     console.log('cusomter ms **window.sessionStorage.userLoggedIn: ' + window.sessionStorage.userLoggedIn);
                     window.addEventListener("message", function (event) {
-                        console.log("Received message from embedding application " + event);
-                        console.log("Payload =  " + JSON.stringify(event.data));
+                        console.log("customer ms ** Received message from embedding application " + event);
+                        console.log("customer ms ** Payload =  " + JSON.stringify(event.data));
                         if (event.data.eventType === "globalContext") {
                             self.globalContext = event.data.payload.globalContext;                       
                             if (self.globalContext.customer) {
                                 self.userLogin(self.globalContext.customer.title + " " + self.globalContext.customer.firstName + " " + self.globalContext.customer.lastName);
-                                un = self.globaContext.customer.email;
+                                username = self.globaContext.customer.email;
                             }
                             ;
-                            this.console.log("Message from global context - username = " + un);
-                            if (un === "Not yet logged in" || un === "") {
+                            this.console.log("customer ms **Message from global context - username = " + username);
+                            if (username === "Not yet logged in" || username=== "") {
                                 self.userLoggedIn("N");
                             } else {
                                 self.userLoggedIn("Y");
