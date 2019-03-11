@@ -96,16 +96,8 @@ define(['ojs/ojcore', 'knockout', 'ojs/ojknockout', 'ojs/ojrouter', 'ojs/ojmodul
                 };
 
                 self.init = function () {
-                    // listener for events posted on the window;
-                    // used for applications running insidean IFRAME to receive events from the
-                    // embedding application
-                    console.log('customer ms ** in init appcontroler');
-                     var username = self.globalContext.userName;
-                     console.log('customer ms ** self.globalConext.userName = ' + self.globalContext.userName);
-                     console.log('cusomter ms **window.sessionStorage.userLoggedIn: ' + window.sessionStorage.userLoggedIn);
-                    window.addEventListener("message", function (event) {
-                        console.log("customer ms ** Received message from embedding application " + event);
-                        console.log("customer ms ** Payload =  " + JSON.stringify(event.data));
+                  var username = self.globalContext.userName;
+                  window.addEventListener("message", function (event) {
                         if (event.data.eventType === "globalContext") {
                             self.globalContext = event.data.payload.globalContext;                       
                             if (self.globalContext.customer) {
@@ -114,7 +106,7 @@ define(['ojs/ojcore', 'knockout', 'ojs/ojknockout', 'ojs/ojrouter', 'ojs/ojmodul
                             }
                             ;
                             this.console.log("customer ms **Message from global context - username = " + username);
-                            if (username === "Not yet logged in" || username=== "") {
+                            if (!username || username === "Not yet logged in" || username=== "") {
                                 self.userLoggedIn("N");
                             } else {
                                 self.userLoggedIn("Y");

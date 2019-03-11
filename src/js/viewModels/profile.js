@@ -14,7 +14,6 @@ define(
 
                 var rootViewModel = ko.dataFor(document.getElementById('globalBody'));
                 var customer = rootViewModel.globalContext.customer || window.sessionStorage.customer || {};
-               
                 
                 //todo use ko.mapping 
                 self.firstName = ko.observable(customer.firstName);
@@ -83,7 +82,7 @@ define(
                 self.expirationDate = ko.observable(expirationDate);
                 self.nameOnCard = ko.observable(nameOnCard);
 
-                self.getUserProfile = function () {
+                function getUserProfile() {
                     return new Promise(function (resolve, reject) {
                         data.getUserProfile(self.id).then(function (response) {
                             console.log('response: ' + JSON.stringify(response));
@@ -168,29 +167,6 @@ define(
                     
                 }
                 
-                self.signIn = function(event){
-                    app.doLogout();
-                    app.router.go('sign');
-                };
-
-
-
-                self.signUp = function(event){
-                    console.log('in signup, clearing form');
-                    customer = {};
-                    window.sessionStorage.customer = {};
-                    customer = {};
-                    customer.addresses = [];
-                    customer.paymentDetails = {};
-                    customer.preferences = {};
-                    
-                };
-                
-                self.signOut = function(event){
-                    app.doLogout();
-                    app.router.go('sign');
-                };
-
                 self.saveProfile = function (event) {
                     var updatedCustomer = {
                         "firstName": self.firstName(),
