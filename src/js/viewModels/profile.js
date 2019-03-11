@@ -154,7 +154,7 @@ define(
 
                 if (!self.signup) {
                     console.log('in !self.signup');
-                    self.getUserProfile();
+                    getUserProfile();
                 }
                 ;
 
