@@ -13,7 +13,7 @@ define(['ojs/ojcore', 'knockout', 'ojs/ojknockout', 'ojs/ojrouter', 'ojs/ojmodul
             var router = oj.Router.rootInstance;
             router.configure({
                 'profile': {label: 'Profile'},
-                'sign': {label: 'Sign'}
+                'sign': {label: 'Sign' , isDefault: true}
             });
 
             function ControllerViewModel() {
@@ -22,6 +22,21 @@ define(['ojs/ojcore', 'knockout', 'ojs/ojknockout', 'ojs/ojrouter', 'ojs/ojmodul
 
                 self.router = router;
                 
+                 self.pendingAnimationType = null;
+
+                function switcherCallback(context) {
+                    return self.pendingAnimationType;
+                }
+
+                function mergeConfig(original) {
+                    return $.extend(true, {}, original, {
+                        'animation': oj.ModuleAnimations.switcher(switcherCallback),
+                        'cacheKey': self.router.currentValue()
+                    });
+                }
+
+                self.moduleConfig = mergeConfig(self.router.moduleConfig);
+
                 $(document).ready(function () {
                     self.init();
                 });
@@ -58,31 +73,13 @@ define(['ojs/ojcore', 'knockout', 'ojs/ojknockout', 'ojs/ojrouter', 'ojs/ojmodul
 
                 };
                 
-                  self.doLogout = function(){
-                    self.globalContext.customer = {};
-                    self.userLoggedIn("N");
-                    window.sessionStorage.userLoggedIn = false;
-                    window.sessionStorage.profileId = null;
-                    self.globalContext.username=null;
-                    self.globalContext.userLoggedIn="N";
-                    var signOutEvent = {
-                         "eventType": "userSignOutEvent"
-                        , "source": "Customers Portlet"
-                        , "payload": {
-                            "username": "",
-                            "customer": ""
-                        }
-                    };
-                    self.callParent(signOutEvent)
-                    };
-                
 
 
                 // this function will communicate an event with the parent window
                 // typically used for applications that run inside an IFRAME to inform the
                 // embedding application about what is going on.      
                 self.callParent = function (message) {
-                    console.log('customer ms ** send message from Customers to parent window');
+                    console.log('send message from Customers to parent window');
                     // here we can restrict which parent page can receive our message
                     // by specifying the origin that this page should have
                     var targetOrigin = '*';
@@ -96,19 +93,30 @@ define(['ojs/ojcore', 'knockout', 'ojs/ojknockout', 'ojs/ojrouter', 'ojs/ojmodul
                 };
 
                 self.init = function () {
-                  var username = self.globalContext.userName;
-                  window.addEventListener("message", function (event) {
+                    // listener for events posted on the window;
+                    // used for applications running insidean IFRAME to receive events from the
+                    // embedding application
+                    console.log('in init appcontroler');
+                     var un = self.globalContext.userName;
+                     console.log('self.globalConext.userName = ' + self.globalContext.userName);
+                     console.log('window.sessionStorage.userLoggedIn: ' + window.sessionStorage.userLoggedIn);
+                    window.addEventListener("message", function (event) {
+                        console.log("Received message from embedding application " + event);
+                        console.log("Payload =  " + JSON.stringify(event.data));
                         if (event.data.eventType === "globalContext") {
                             self.globalContext = event.data.payload.globalContext;                       
                             if (self.globalContext.customer) {
                                 self.userLogin(self.globalContext.customer.title + " " + self.globalContext.customer.firstName + " " + self.globalContext.customer.lastName);
-                                username = self.globalContext.customer.email;
+                                un = self.globaConext.customer.email;
                             }
                             ;
-                            if (!username || username === "Not yet logged in" || username=== "") {
+                            this.console.log("Message from global context - username = " + un);
+                            if (un === "Not yet logged in" || un === "") {
                                 self.userLoggedIn("N");
+                                router.go('sign');
                             } else {
                                 self.userLoggedIn("Y");
+                                router.go('profile');
                             }
                             //inform listeners of new global context
                             self.globalContextListeners.forEach(function (listener) {

@@ -1,5 +1,5 @@
 define(
-        ['ojs/ojcore', 'knockout', 'dataService','appController','jquery', 'ojs/ojinputtext', 'ojs/ojbutton', 'ojs/ojdatetimepicker', 'ojs/ojlabel', 'ojs/ojselectcombobox', 'ojs/ojswitch'
+        ['ojs/ojcore', 'knockout', 'dataService', 'appController', 'jquery', 'ojs/ojinputtext', 'ojs/ojbutton', 'ojs/ojdatetimepicker', 'ojs/ojlabel', 'ojs/ojselectcombobox', 'ojs/ojswitch'
         ],
         function (oj, ko, data, app, $) {
             'use strict';
@@ -9,12 +9,12 @@ define(
                 var self = this;
 
                 self.id = window.sessionStorage.profileId;
-                self.signup = !window.sessionStorage.userLoggedIn;
+                self.signup = window.sessionStorage.signUp && !window.sessionStorage.userLoggedIn;
 
 
                 var rootViewModel = ko.dataFor(document.getElementById('globalBody'));
                 var customer = rootViewModel.globalContext.customer || window.sessionStorage.customer || {};
-                
+
                 //todo use ko.mapping 
                 self.firstName = ko.observable(customer.firstName);
                 self.lastName = ko.observable(customer.lastName);
@@ -83,16 +83,22 @@ define(
                 self.nameOnCard = ko.observable(nameOnCard);
 
                 function getUserProfile() {
-                    return new Promise(function (resolve, reject) {
-                        data.getUserProfile(self.id).then(function (response) {
-                            console.log('response: ' + JSON.stringify(response));
-                            processUserProfile(response, resolve, reject);
-                        }).catch(function (response) {
-                            console.error('exception getting profile');
-                            processUserProfile(response, resolve, reject);
+                    if (self.id) {
+                        console.log('getting userprofile from ' + self.id);
+                        return new Promise(function (resolve, reject) {
+                            data.getUserProfile(self.id).then(function (response) {
+                                console.log('response: ' + JSON.stringify(response));
+                                processUserProfile(response, resolve, reject);
+                            }).catch(function (response) {
+                                console.error('exception getting profile');
+                                processUserProfile(response, resolve, reject);
+                            });
+
                         });
-                    });
-                };
+                    }
+                    ;
+                }
+                ;
 
                 function processUserProfile(response, resolve, reject) {
                     var result = response;
@@ -148,7 +154,7 @@ define(
                 }
                 ;
 
-               var customersMSAPIEndpoint = "http://129.213.126.223:8011/customer";
+                var customersMSAPIEndpoint = "http://129.213.126.223:8011/customer";
                 //var customersMSAPIEndpoint = "http://localhost:8080/customer";
 
 
@@ -164,9 +170,9 @@ define(
                     customer.addresses = [];
                     customer.paymentDetails = {};
                     customer.preferences = {};
-                    
+
                 }
-                
+
                 self.saveProfile = function (event) {
                     var updatedCustomer = {
                         "firstName": self.firstName(),
@@ -262,6 +268,7 @@ define(
 
                             console.log(response);
                             alert('changes saved');
+                            app.router.go('sign');
 
                         }).fail(function (textStatus, errorThrown) {
                             console.error(errorThrown);
