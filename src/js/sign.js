@@ -97,7 +97,7 @@ define(['ojs/ojcore', 'knockout', 'ojs/ojknockout', 'ojs/ojrouter', 'ojs/ojmodul
                     // used for applications running insidean IFRAME to receive events from the
                     // embedding application
                     console.log('in init appcontroler');
-                     var un = self.globalContext.userName;
+                     var username = self.globalContext.userName;
                      console.log('self.globalConext.userName = ' + self.globalContext.userName);
                      console.log('window.sessionStorage.userLoggedIn: ' + window.sessionStorage.userLoggedIn);
                     window.addEventListener("message", function (event) {
@@ -107,11 +107,11 @@ define(['ojs/ojcore', 'knockout', 'ojs/ojknockout', 'ojs/ojrouter', 'ojs/ojmodul
                             self.globalContext = event.data.payload.globalContext;                       
                             if (self.globalContext.customer) {
                                 self.userLogin(self.globalContext.customer.title + " " + self.globalContext.customer.firstName + " " + self.globalContext.customer.lastName);
-                                un = self.globaConext.customer.email;
+                                username = self.globaConext.customer.email;
                             }
                             ;
-                            this.console.log("Message from global context - username = " + un);
-                            if (un === "Not yet logged in" || un === "") {
+                            this.console.log("Message from global context - username = " + username);
+                            if (!username || username === "Not yet logged in" || username === "") {
                                 self.userLoggedIn("N");
                                 router.go('sign');
                             } else {
