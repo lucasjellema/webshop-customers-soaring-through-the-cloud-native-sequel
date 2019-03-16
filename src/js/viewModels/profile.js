@@ -13,7 +13,7 @@ define(
 
 
                 var rootViewModel = ko.dataFor(document.getElementById('globalBody'));
-                var customer = rootViewModel.globalContext.customer || window.sessionStorage.customer || {};
+                var customer = ko.observable(rootViewModel.globalContext.customer || window.sessionStorage.customer || {});
 
                 //todo use ko.mapping 
                 self.firstName = ko.observable(customer.firstName);

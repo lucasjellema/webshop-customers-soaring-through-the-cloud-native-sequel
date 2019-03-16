@@ -8,12 +8,12 @@
 define(['ojs/ojcore', 'knockout', 'ojs/ojknockout', 'ojs/ojrouter', 'ojs/ojmoduleanimations'],
         function (oj, ko) {
 
-            
+
             oj.Router.defaults['urlAdapter'] = new oj.Router.urlParamAdapter();
             var router = oj.Router.rootInstance;
             router.configure({
                 'profile': {label: 'Profile'},
-                'sign': {label: 'Sign' , isDefault: true}
+                'sign': {label: 'Sign', isDefault: true}
             });
 
             function ControllerViewModel() {
@@ -21,10 +21,10 @@ define(['ojs/ojcore', 'knockout', 'ojs/ojknockout', 'ojs/ojrouter', 'ojs/ojmodul
                 self.globalContext = {};
 
                 self.router = router;
-                
-                 self.pendingAnimationType = null;
 
-                function switcherCallback(context) {
+                self.pendingAnimationType = null;
+
+                function switcherCallback() {
                     return self.pendingAnimationType;
                 }
 
@@ -59,8 +59,8 @@ define(['ojs/ojcore', 'knockout', 'ojs/ojknockout', 'ojs/ojrouter', 'ojs/ojmodul
                     self.userLoggedIn("Y");
                     window.sessionStorage.userLoggedIn = true;
                     window.sessionStorage.profileId = customer._id;
-                    self.globalContext.username=customer.email;
-                    self.globalContext.userLoggedIn="Y";
+                    self.globalContext.username = customer.email;
+                    self.globalContext.userLoggedIn = "Y";
                     var signinEvent = {
                         "eventType": "userSignInEvent"
                         , "source": "Customers Portlet"
@@ -72,7 +72,7 @@ define(['ojs/ojcore', 'knockout', 'ojs/ojknockout', 'ojs/ojrouter', 'ojs/ojmodul
                     self.callParent(signinEvent);
 
                 };
-                
+
 
 
                 // this function will communicate an event with the parent window
@@ -97,14 +97,14 @@ define(['ojs/ojcore', 'knockout', 'ojs/ojknockout', 'ojs/ojrouter', 'ojs/ojmodul
                     // used for applications running insidean IFRAME to receive events from the
                     // embedding application
                     console.log('in init appcontroler');
-                     var username = self.globalContext.userName;
-                     console.log('self.globalConext.userName = ' + self.globalContext.userName);
-                     console.log('window.sessionStorage.userLoggedIn: ' + window.sessionStorage.userLoggedIn);
+                    var username = self.globalContext.userName;
+                    console.log('self.globalConext.userName = ' + self.globalContext.userName);
+                    console.log('window.sessionStorage.userLoggedIn: ' + window.sessionStorage.userLoggedIn);
                     window.addEventListener("message", function (event) {
                         console.log("Received message from embedding application " + event);
                         console.log("Payload =  " + JSON.stringify(event.data));
                         if (event.data.eventType === "globalContext") {
-                            self.globalContext = event.data.payload.globalContext;                       
+                            self.globalContext = event.data.payload.globalContext;
                             if (self.globalContext.customer) {
                                 self.userLogin(self.globalContext.customer.title + " " + self.globalContext.customer.firstName + " " + self.globalContext.customer.lastName);
                                 username = self.globaConext.customer.email;
@@ -116,7 +116,17 @@ define(['ojs/ojcore', 'knockout', 'ojs/ojknockout', 'ojs/ojrouter', 'ojs/ojmodul
                                 router.go('sign');
                             } else {
                                 self.userLoggedIn("Y");
-                                router.go('profile');
+                                router.go('profile').then(
+                                        function (result) {
+                                            if (!result.hasChanged()) {
+                                            } else {
+                                                oj.Router.sync();
+                                            }
+                                        },
+                                        function (error) {
+                                            console.error("transition failed to profile " + error);
+                                        }
+                                );
                             }
                             //inform listeners of new global context
                             self.globalContextListeners.forEach(function (listener) {
@@ -127,7 +137,7 @@ define(['ojs/ojcore', 'knockout', 'ojs/ojknockout', 'ojs/ojrouter', 'ojs/ojmodul
                             false);
                     self.callParent({"childHasLoaded": true});
                 };
-                
+
 
             }
 
