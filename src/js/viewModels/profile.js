@@ -1,7 +1,8 @@
 define(
         ['ojs/ojcore', 'knockout', 'dataService', 'appController', 'jquery', 'ojs/ojinputtext', 'ojs/ojbutton', 'ojs/ojdatetimepicker', 'ojs/ojlabel', 'ojs/ojselectcombobox', 'ojs/ojswitch'
         ],
-        function (oj, ko, data, app) {
+        function (oj, ko, data, app
+                ) {
             'use strict';
 
             function ProfileModel() {
@@ -32,12 +33,12 @@ define(
 
 
 
-                self.id = $(window).sessionStorage.profileId;
-                self.signup = $(window).sessionStorage.signUp && !($(window).sessionStorage.userLoggedIn);
+                self.id = sessionStorage.getItem('profileId');
+                self.signup = sessionStorage.getItem('signUp') && !(sessionStorage.getItem('userLoggedIn'));
 
 
                 var rootViewModel = ko.dataFor($.document.getElementById('globalBody'));
-                var customer = ko.observable(rootViewModel.globalContext.customer || window.sessionStorage.customer || {});
+                var customer = ko.observable(rootViewModel.globalContext.customer || JSON.parse(sessionStorage.getItem('customer')) || {});
                
                 function getUserProfile() {
                     if (self.id) {

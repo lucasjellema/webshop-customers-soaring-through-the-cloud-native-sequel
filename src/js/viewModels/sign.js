@@ -45,8 +45,8 @@ define(
                 }).done(function (response) {
                         var rootViewModel = ko.dataFor(document.getElementById('globalBody'));
                         rootViewModel.doLogin(response);
-                        window.sessionStorage.signUp = false;
-                        window.sessionStorage.userLoggedIn = true;
+                        sessionStorage.setItem('signUp',false);
+                        sessionStorage.setItem('userLoggedIn',true);
                         app.router.go('profile');
 
                 }).fail(function (textStatus, errorThrown) {
@@ -59,7 +59,7 @@ define(
             
             self.signUpLinkClick = function (event) {
                 console.log('clicked signup');
-                window.sessionStorage.signUp = true;
+                sessionStorage.setItem('signUp', true);
                 app.router.go('profile');
 
             };            
