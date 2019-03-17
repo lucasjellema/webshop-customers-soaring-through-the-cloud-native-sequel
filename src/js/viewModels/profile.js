@@ -8,6 +8,7 @@ define(
 
                 var self = this;
                 self.serviceURL = 'http://129.213.126.223:8011/customer';
+               
 
                 self.firstName = ko.observable();
                 self.lastName = ko.observable();
@@ -36,7 +37,7 @@ define(
 
 
                 var rootViewModel = ko.dataFor(document.getElementById('globalBody'));
-                self.customer = ko.observable(rootViewModel.globalContext.customer || window.sessionStorage.customer || {});
+                var customer = ko.observable(rootViewModel.globalContext.customer || window.sessionStorage.customer || {});
                
                 function getUserProfile() {
                     if (self.id) {
@@ -58,9 +59,11 @@ define(
 
                 function processUserProfile(response, resolve, reject) {
                     var result = response;
+                    console.log("customer before mapping result: " + self.customer);
                     if (result) {
                         self.customer = result;
                         resolve(mapCustomer(self.customer));
+                        console.log('customer after mapping result: ' + self.customer);
                         return;
                     }
 
