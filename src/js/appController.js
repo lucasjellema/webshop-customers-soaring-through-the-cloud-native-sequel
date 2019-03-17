@@ -5,8 +5,8 @@
 /*
  * Your application specific code will go here
  */
-define(['ojs/ojcore', 'knockout', 'ojs/ojknockout', 'ojs/ojrouter', 'ojs/ojmoduleanimations'],
-        function (oj, ko) {
+define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojknockout', 'ojs/ojrouter', 'ojs/ojmoduleanimations'],
+        function (oj, ko, $) {
 
 
             oj.Router.defaults['urlAdapter'] = new oj.Router.urlParamAdapter();
@@ -37,7 +37,7 @@ define(['ojs/ojcore', 'knockout', 'ojs/ojknockout', 'ojs/ojrouter', 'ojs/ojmodul
 
                 self.moduleConfig = mergeConfig(self.router.moduleConfig);
 
-                $(document).ready(function () {
+                $.document.ready(function () {
                     self.init();
                 });
 
@@ -57,8 +57,8 @@ define(['ojs/ojcore', 'knockout', 'ojs/ojknockout', 'ojs/ojrouter', 'ojs/ojmodul
                     self.globalContext.customer = customer;
                     self.userLogin(self.globalContext.customer.title + " " + self.globalContext.customer.firstName + " " + self.globalContext.customer.lastName);
                     self.userLoggedIn("Y");
-                    window.sessionStorage.userLoggedIn = true;
-                    window.sessionStorage.profileId = customer._id;
+                    $.window.sessionStorage.userLoggedIn = true;
+                    $.window.sessionStorage.profileId = customer._id;
                     self.globalContext.username = customer.email;
                     self.globalContext.userLoggedIn = "Y";
                     var signinEvent = {

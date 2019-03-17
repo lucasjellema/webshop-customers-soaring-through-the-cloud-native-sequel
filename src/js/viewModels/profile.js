@@ -32,11 +32,11 @@ define(
 
 
 
-                self.id = window.sessionStorage.profileId;
-                self.signup = window.sessionStorage.signUp && !window.sessionStorage.userLoggedIn;
+                self.id = $.window.sessionStorage.profileId;
+                self.signup = $.window.sessionStorage.signUp && !window.sessionStorage.userLoggedIn;
 
 
-                var rootViewModel = ko.dataFor(document.getElementById('globalBody'));
+                var rootViewModel = ko.dataFor($.document.getElementById('globalBody'));
                 var customer = ko.observable(rootViewModel.globalContext.customer || window.sessionStorage.customer || {});
                
                 function getUserProfile() {
@@ -233,7 +233,7 @@ define(
 
                         });
                     }
-                self.signup = false;
+                
                 };
 
             }
