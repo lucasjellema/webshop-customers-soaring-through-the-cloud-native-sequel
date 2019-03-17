@@ -7,7 +7,7 @@ define(
             function ProfileModel() {
 
                 var self = this;
-                self.serviceURL = '"http://129.213.126.223:8011/customer"';
+                self.serviceURL = 'http://129.213.126.223:8011/customer';
 
                 self.firstName = ko.observable();
                 self.lastName = ko.observable();
@@ -36,8 +36,8 @@ define(
 
 
                 var rootViewModel = ko.dataFor(document.getElementById('globalBody'));
-                var customer = ko.observable(rootViewModel.globalContext.customer || window.sessionStorage.customer || {});
-
+                self.customer = ko.observable(rootViewModel.globalContext.customer || window.sessionStorage.customer || {});
+               
                 function getUserProfile() {
                     if (self.id) {
                         console.log('getting userprofile from ' + self.id);
@@ -59,8 +59,8 @@ define(
                 function processUserProfile(response, resolve, reject) {
                     var result = response;
                     if (result) {
-                        customer = result;
-                        resolve(mapCustomer(customer));
+                        self.customer = result;
+                        resolve(mapCustomer(self.customer));
                         return;
                     }
 
