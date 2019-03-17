@@ -37,7 +37,7 @@ define(
                 self.signup = sessionStorage.getItem('signUp') && !(sessionStorage.getItem('userLoggedIn'));
 
 
-                var rootViewModel = ko.dataFor($.document.getElementById('globalBody'));
+                var rootViewModel = ko.dataFor(document.getElementById('globalBody'));
                 var customer = ko.observable(rootViewModel.globalContext.customer || JSON.parse(sessionStorage.getItem('customer')) || {});
                
                 function getUserProfile() {

@@ -51,7 +51,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojknockout', 'ojs/ojrouter', 'o
 
                 // User Info used in Global Navigation area
                 self.userLogin = ko.observable("Not yet logged in");
-                self.userLoggedIn = ko.observable(JSON.parse(sessionStorage.getItem('userLoggedIn'));
+                self.userLoggedIn = ko.observable(JSON.parse(sessionStorage.getItem('userLoggedIn')));
 
                 self.doLogin = function (customer) {
                     self.globalContext.customer = customer;
