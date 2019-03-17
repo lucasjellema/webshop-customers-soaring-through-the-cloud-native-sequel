@@ -6,9 +6,13 @@
             <form method="post" action="" name="signInForm">
                 <!--oj-input-text id="login-result" value="{{loginResult}}" readOnly="true"></oj-input-text>
                 <oj-label for="username-input">Enter your username</oj-label-->
+                <div>
                 <oj-input-text id="username-input" placeholder='User name' spellcheck='false' autocorrect='off' autocapitalize=off aria-label='User Name' value='{{username}}' required='true'></oj-input-text>
+                </div>
                 <br/>
+                <div>
                 <oj-input-password id="password" placeholder='Password' autocomplete='off' value="{{password}}" placeholder='Password' required='true'></oj-input-password>
+                </div>
                 <br/>
             <div class="oj-hybrid-padding-top">
                 <button class="oj-button-primary" data-bind="click: loginButtonClick,

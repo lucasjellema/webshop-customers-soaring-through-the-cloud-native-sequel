@@ -7,6 +7,29 @@ define(
             function ProfileModel() {
 
                 var self = this;
+                self.serviceURL = '"http://129.213.126.223:8011/customer"';
+
+                self.firstName = ko.observable();
+                self.lastName = ko.observable();
+                self.title = ko.observable();
+                self.email = ko.observable();
+                self.dateOfBirth = ko.observable();
+                self.password = ko.observable();
+
+                self.newsLetter = ko.observable();
+                self.offer = ko.observable();
+                self.addressType = ko.observable();
+                self.streetName = ko.observable();
+                self.streetNumber = ko.observable();
+                self.city = ko.observable();
+                self.postcode = ko.observable();
+                self.country = ko.observable();
+                self.paymentType = ko.observable();
+                self.cardNumber = ko.observable();
+                self.expirationDate = ko.observable();
+                self.nameOnCard = ko.observable();
+
+
 
                 self.id = window.sessionStorage.profileId;
                 self.signup = window.sessionStorage.signUp && !window.sessionStorage.userLoggedIn;
@@ -14,73 +37,6 @@ define(
 
                 var rootViewModel = ko.dataFor(document.getElementById('globalBody'));
                 var customer = ko.observable(rootViewModel.globalContext.customer || window.sessionStorage.customer || {});
-
-                //todo use ko.mapping 
-                self.firstName = ko.observable(customer.firstName);
-                self.lastName = ko.observable(customer.lastName);
-                self.title = ko.observable(customer.title);
-                self.email = ko.observable(customer.email);
-                self.dateOfBirth = ko.observable(customer.dateOfBirth);
-                self.password = ko.observable(customer.password);
-                var newsletter = "false";
-                var offers = "false";
-                if (customer.preferences) {
-                    newsletter = customer.preferences.newsLetter;
-                    offers = customer.preferences.offers;
-                }
-                self.newsLetter = ko.observable(newsletter);
-                self.offer = ko.observable(offers);
-
-                var addressType = "BILLING";
-                var streetName;
-                var streetNumber;
-                var postcode;
-                var city;
-                var country;
-
-
-                if (customer.addresses) {
-                    if (customer.addresses.length > 0) {
-                        addressType = customer.addresses[0].type;
-                        streetName = customer.addresses[0].streetName;
-                        streetNumber = customer.addresses[0].streetNumber;
-                        postcode = customer.addresses[0].postcode;
-                        city = customer.addresses[0].city;
-                        country = customer.addresses[0].country;
-                    } else {
-                        customer.addresses = {};
-
-                    }
-                }
-
-                self.addressType = ko.observable(addressType);
-                self.streetName = ko.observable(streetName);
-                self.streetNumber = ko.observable(streetNumber);
-                self.city = ko.observable(city);
-                self.postcode = ko.observable(postcode);
-                self.country = ko.observable(country);
-
-
-                //payment details
-                //TODO make it take multiple cards, currently it only shows the first card and you can only update a card, not add it.
-                var paymentType = "CREDIT";
-                var cardNumber = "";
-                var expirationDate = "";
-                var nameOnCard = customer.lastName;
-
-                if (customer.paymentDetails) {
-                    if (customer.paymentDetails.length > 0) {
-                        paymentType = customer.paymentDetails[0].type;
-                        cardNumber = customer.paymentDetails[0].cardNumber;
-                        expirationDate = customer.paymentDetails[0].expirationDate;
-                        nameOnCard = customer.paymentDetails[0].nameOnCard;
-                    }
-                }
-
-                self.paymentType = ko.observable(paymentType);
-                self.cardNumber = ko.observable(cardNumber);
-                self.expirationDate = ko.observable(expirationDate);
-                self.nameOnCard = ko.observable(nameOnCard);
 
                 function getUserProfile() {
                     if (self.id) {
