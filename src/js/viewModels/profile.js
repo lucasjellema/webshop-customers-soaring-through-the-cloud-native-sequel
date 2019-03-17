@@ -59,11 +59,9 @@ define(
 
                 function processUserProfile(response, resolve, reject) {
                     var result = response;
-                    console.log("customer before mapping result: " + self.customer);
                     if (result) {
                         self.customer = result;
                         resolve(mapCustomer(self.customer));
-                        console.log('customer after mapping result: ' + self.customer);
                         return;
                     }
 
@@ -235,6 +233,7 @@ define(
 
                         });
                     }
+                self.signup = false;
                 };
 
             }
