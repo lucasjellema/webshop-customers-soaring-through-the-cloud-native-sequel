@@ -57,8 +57,8 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojknockout', 'ojs/ojrouter', 'o
                     self.globalContext.customer = customer;
                     self.userLogin(self.globalContext.customer.title + " " + self.globalContext.customer.firstName + " " + self.globalContext.customer.lastName);
                     self.userLoggedIn("Y");
-                    sessionStorage.setItem('userLoggedIn') = true;
-                    sessionStorage.setItem('profileId') = customer._id;
+                    sessionStorage.setItem('userLoggedIn', true);
+                    sessionStorage.setItem('profileId', customer._id);
                     self.globalContext.username = customer.email;
                     self.globalContext.userLoggedIn = "Y";
                     var signinEvent = {
