@@ -101,18 +101,12 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojknockout', 'ojs/ojrouter', 'o
                             this.console.log("Message from global context - username = " + username);
                             if (!self.globalContext.userName || self.globalContext.userName === "Not yet logged in" || self.globalContext.userName === "") {
                                 self.userLoggedIn("N");
+                                sessionStorage.setItem('userLoggedIn', false);
+                                sessionStorage.setItem('profileId', null);
                                 router.go('sign');
                             } else {
                                 self.userLoggedIn("Y");
-                                router.go('profile').then(
-                                        function () {
-                                             oj.Router.sync();
-                                            
-                                        },
-                                        function (error) {
-                                            console.error("transition failed to profile " + error);
-                                        }
-                                );
+                                router.go('profile');
                             }
                             self.globalContextListeners.forEach(function (listener) {
                                 listener(self.globalContext);

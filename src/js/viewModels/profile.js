@@ -32,26 +32,24 @@ define(
                 self.nameOnCard = ko.observable();
                 let customer = ko.observable();
                 let id = ko.observable();
-                self.signup = ko.observable();
+                let signup = ko.observable();
+                self.signedin = ko.observable();
 
 
                 self.handleActivated = function (info) {
-                    console.log("in self.handleActivated: " + info);
-
                     self.id = sessionStorage.getItem('profileId');
                     self.signup = sessionStorage.getItem('signUp');
-
-                    console.log('self signup: ' + self.signup);
-                    console.log('self.id: ' + self.id);
-
+                    
                     // we either are in signing up (true), or just signed in (have an id), or landed here by default and should go to sign in
                     if (self.signup === 'true') {
                         console.log('signing up');
+                        self.signedin(false);
                         self.customer = {};
                         self.customer.addresses = [];
                         self.customer.paymentDetails = {};
                         self.customer.preferences = {}; 
                     } else if(self.id) {
+                        self.signedin(true);
                         getUserProfile();
                     } else{
                         app.router.go('sign');
