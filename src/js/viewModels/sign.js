@@ -45,7 +45,7 @@ define(
                 }).done(function (response) {
                         var rootViewModel = ko.dataFor(document.getElementById('globalBody'));
                         rootViewModel.doLogin(response);
-                        sessionStorage.setItem('signUp',false);
+                        sessionStorage.setItem('signUp', false);
                         sessionStorage.setItem('userLoggedIn',true);
                         app.router.go('profile');
 

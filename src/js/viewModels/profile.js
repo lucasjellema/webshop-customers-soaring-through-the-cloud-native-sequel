@@ -30,27 +30,34 @@ define(
                 self.cardNumber = ko.observable();
                 self.expirationDate = ko.observable();
                 self.nameOnCard = ko.observable();
-                self.id = ko.observable();
+                let customer = ko.observable();
+                let id = ko.observable();
                 self.signup = ko.observable();
-                var rootViewModel = ko.dataFor(document.getElementById('globalBody'));
-                self.customer = ko.observable();
 
 
                 self.handleActivated = function (info) {
                     console.log("in self.handleActivated: " + info);
 
                     self.id = sessionStorage.getItem('profileId');
-                    self.signup = sessionStorage.getItem('signUp') && !(sessionStorage.getItem('userLoggedIn'));
+                    self.signup = sessionStorage.getItem('signUp');
 
-                     self.customer = ko.observable(rootViewModel.globalContext.customer || JSON.parse(sessionStorage.getItem('customer')) || {});
-                    if (self.id) {
+                    console.log('self signup: ' + self.signup);
+                    console.log('self.id: ' + self.id);
+
+                    if (self.signup === 'true') {
+                        console.log('signing up');
+                        self.customer = {};
+                        self.customer.addresses = [];
+                        self.customer.paymentDetails = {};
+                        self.customer.preferences = {}; 
+                    } else {
+                        console.log('getting userprofile');
                         getUserProfile();
                     }
 
                 };
 
                 function getUserProfile() {
-
                     return new Promise(function (resolve, reject) {
                         data.getUserProfile(self.id).then(function (response) {
                             console.log('response: ' + JSON.stringify(response));
@@ -119,19 +126,6 @@ define(
                 }
                 ;
 
-                var customersMSAPIEndpoint = "http://129.213.126.223:8011/customer";
-                if (!self.signup) {
-                    getUserProfile();
-                }
-                ;
-
-                if (self.signup) {
-                    self.customer = {};
-                    self.customer.addresses = [];
-                    self.customer.paymentDetails = {};
-                    self.customer.preferences = {};
-
-                }
 
                 self.saveProfile = function (event) {
                     var updatedCustomer = {
@@ -147,7 +141,7 @@ define(
                         }
                     };
 
-                    if (self.customer.addresses) {
+                    if (self.streetName()) {
                         var addressBilling = {
                             "type": self.addressType(),
                             "streetName": self.streetName(),
@@ -163,7 +157,7 @@ define(
                         //TODO add delivery address
                     }
 
-                    if (self.customer.paymentDetails) {
+                    if (self.cardNumber()) {
                         var updatedPaymentDetail = {
                             "type": self.paymentType(),
                             "cardNumber": self.cardNumber(),
@@ -184,7 +178,7 @@ define(
                         //update the profile
                         return $.ajax({
                             type: 'PUT',
-                            url: customersMSAPIEndpoint + "/profile/" + self.customer._id,
+                            url: self.serviceURL + "/profile/" + self.customer._id,
                             data: JSON.stringify(updatedCustomer),
                             contentType: 'application/json; charset=UTF-8',
 
@@ -210,7 +204,7 @@ define(
                     } else {
                         return $.ajax({
                             type: 'POST',
-                            url: customersMSAPIEndpoint + "/profile/",
+                            url: self.serviceURL + "/profile/",
                             data: JSON.stringify(updatedCustomer),
                             contentType: 'application/json; charset=UTF-8',
 
@@ -227,7 +221,7 @@ define(
                         }).done(function (response) {
 
                             console.log(response);
-                            alert(response);
+                            alert(response.message);
                             app.router.go('sign');
 
                         }).fail(function (textStatus, errorThrown) {
