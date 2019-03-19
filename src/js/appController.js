@@ -95,7 +95,6 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojknockout', 'ojs/ojrouter', 'o
                         if (event.data.eventType === "globalContext") {
                             self.globalContext = event.data.payload.globalContext;
                             if (self.globalContext.customer) {
-                                self.userLogin(self.globalContext.customer.title + " " + self.globalContext.customer.firstName + " " + self.globalContext.customer.lastName);
                                 username = self.globaContext.customer.email;
                             }
                             ;
