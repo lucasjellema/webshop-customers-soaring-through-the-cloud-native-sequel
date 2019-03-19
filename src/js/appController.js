@@ -95,7 +95,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojknockout', 'ojs/ojrouter', 'o
                         if (event.data.eventType === "globalContext") {
                             self.globalContext = event.data.payload.globalContext;
                             if (self.globalContext.customer) {
-                                username = self.globaContext.customer.email;
+                                username = self.globalContext.customer.email;
                             }
                             ;
                             this.console.log("Message from global context - username = " + username);
