@@ -9,7 +9,7 @@ define(
 
                 var self = this;
                 self.serviceURL = 'http://129.213.126.223:8011/customer';
-               
+
 
                 self.firstName = ko.observable();
                 self.lastName = ko.observable();
@@ -30,30 +30,37 @@ define(
                 self.cardNumber = ko.observable();
                 self.expirationDate = ko.observable();
                 self.nameOnCard = ko.observable();
-
-
-
-                self.id = sessionStorage.getItem('profileId');
-                self.signup = sessionStorage.getItem('signUp') && !(sessionStorage.getItem('userLoggedIn'));
-
-
+                self.id = ko.observable();
+                self.signup = ko.observable();
                 var rootViewModel = ko.dataFor(document.getElementById('globalBody'));
-                var customer = ko.observable(rootViewModel.globalContext.customer || JSON.parse(sessionStorage.getItem('customer')) || {});
-               
-                function getUserProfile() {
-                    if (self.id) {
-                        console.log('getting userprofile from ' + self.id);
-                        return new Promise(function (resolve, reject) {
-                            data.getUserProfile(self.id).then(function (response) {
-                                console.log('response: ' + JSON.stringify(response));
-                                processUserProfile(response, resolve, reject);
-                            }).catch(function (response) {
-                                console.error('exception getting profile');
-                                processUserProfile(response, resolve, reject);
-                            });
+                self.customer = ko.observable();
 
-                        });
+
+                self.handleActivated = function (info) {
+                    console.log("in self.handleActivated: " + info);
+
+                    self.id = sessionStorage.getItem('profileId');
+                    self.signup = sessionStorage.getItem('signUp') && !(sessionStorage.getItem('userLoggedIn'));
+
+                     self.customer = ko.observable(rootViewModel.globalContext.customer || JSON.parse(sessionStorage.getItem('customer')) || {});
+                    if (self.id) {
+                        getUserProfile();
                     }
+
+                };
+
+                function getUserProfile() {
+
+                    return new Promise(function (resolve, reject) {
+                        data.getUserProfile(self.id).then(function (response) {
+                            console.log('response: ' + JSON.stringify(response));
+                            processUserProfile(response, resolve, reject);
+                        }).catch(function (response) {
+                            console.error('exception getting profile');
+                            processUserProfile(response, resolve, reject);
+                        });
+
+                    });
                     ;
                 }
                 ;
@@ -113,21 +120,16 @@ define(
                 ;
 
                 var customersMSAPIEndpoint = "http://129.213.126.223:8011/customer";
-                //var customersMSAPIEndpoint = "http://localhost:8080/customer";
-
-
                 if (!self.signup) {
-                    console.log('in !self.signup');
                     getUserProfile();
                 }
                 ;
 
                 if (self.signup) {
-                    console.log('in signup, clearing form');
-                    customer = {};
-                    customer.addresses = [];
-                    customer.paymentDetails = {};
-                    customer.preferences = {};
+                    self.customer = {};
+                    self.customer.addresses = [];
+                    self.customer.paymentDetails = {};
+                    self.customer.preferences = {};
 
                 }
 
@@ -145,7 +147,7 @@ define(
                         }
                     };
 
-                    if (customer.addresses) {
+                    if (self.customer.addresses) {
                         var addressBilling = {
                             "type": self.addressType(),
                             "streetName": self.streetName(),
@@ -161,7 +163,7 @@ define(
                         //TODO add delivery address
                     }
 
-                    if (customer.paymentDetails) {
+                    if (self.customer.paymentDetails) {
                         var updatedPaymentDetail = {
                             "type": self.paymentType(),
                             "cardNumber": self.cardNumber(),
@@ -178,11 +180,11 @@ define(
 
 
 
-                    if (customer._id) {
+                    if (self.customer._id) {
                         //update the profile
                         return $.ajax({
                             type: 'PUT',
-                            url: customersMSAPIEndpoint + "/profile/" + customer._id,
+                            url: customersMSAPIEndpoint + "/profile/" + self.customer._id,
                             data: JSON.stringify(updatedCustomer),
                             contentType: 'application/json; charset=UTF-8',
 
@@ -225,7 +227,7 @@ define(
                         }).done(function (response) {
 
                             console.log(response);
-                            alert('changes saved');
+                            alert(response);
                             app.router.go('sign');
 
                         }).fail(function (textStatus, errorThrown) {
@@ -234,7 +236,7 @@ define(
 
                         });
                     }
-                
+
                 };
 
             }
