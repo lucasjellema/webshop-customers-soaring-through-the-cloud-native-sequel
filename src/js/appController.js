@@ -12,8 +12,8 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojknockout', 'ojs/ojrouter', 'o
             oj.Router.defaults['urlAdapter'] = new oj.Router.urlParamAdapter();
             var router = oj.Router.rootInstance;
             router.configure({
-                'profile': {label: 'Profile'},
-                'sign': {label: 'Sign', isDefault: true}
+                'profile': {label: 'Profile', isDefault: true },
+                'sign': {label: 'Sign'}
             });
 
             function ControllerViewModel() {
@@ -106,11 +106,9 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojknockout', 'ojs/ojrouter', 'o
                             } else {
                                 self.userLoggedIn("Y");
                                 router.go('profile').then(
-                                        function (result) {
-                                            if (!result.hasChanged()) {
-                                            } else {
-                                                oj.Router.sync();
-                                            }
+                                        function () {
+                                             oj.Router.sync();
+                                            
                                         },
                                         function (error) {
                                             console.error("transition failed to profile " + error);

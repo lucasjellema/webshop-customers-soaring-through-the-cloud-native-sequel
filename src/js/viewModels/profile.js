@@ -44,15 +44,17 @@ define(
                     console.log('self signup: ' + self.signup);
                     console.log('self.id: ' + self.id);
 
+                    // we either are in signing up (true), or just signed in (have an id), or landed here by default and should go to sign in
                     if (self.signup === 'true') {
                         console.log('signing up');
                         self.customer = {};
                         self.customer.addresses = [];
                         self.customer.paymentDetails = {};
                         self.customer.preferences = {}; 
-                    } else {
-                        console.log('getting userprofile');
+                    } else if(self.id) {
                         getUserProfile();
+                    } else{
+                        app.router.go('sign');
                     }
 
                 };
