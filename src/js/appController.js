@@ -99,7 +99,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojknockout', 'ojs/ojrouter', 'o
                             }
                             ;
                             this.console.log("Message from global context - username = " + username);
-                            if (!username || username === "Not yet logged in" || username === "") {
+                            if (!self.globalContext.userName || self.globalContext.userName === "Not yet logged in" || self.globalContext.userName === "") {
                                 self.userLoggedIn("N");
                                 router.go('sign');
                             } else {
