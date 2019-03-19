@@ -222,6 +222,7 @@ define(
 
                             console.log(response);
                             alert(response.message);
+                            sessionStorage.setItem('signUp', false);
                             app.router.go('sign');
 
                         }).fail(function (textStatus, errorThrown) {
