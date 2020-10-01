@@ -7,7 +7,7 @@ define(
             
             var self = this;
             
-            var customersMSAPIEndpoint = "https://oc-144-21-82-92.compute.oraclecloud.com:9129/api/customer"
+            var customersMSAPIEndpoint = "http://oc-129-156-113-240.compute.oraclecloud.com:8011/customer"
             //var customersMSAPIEndpoint = "http://localhost:8080/customer";
             
             var rootViewModel = ko.dataFor(document.getElementById('globalBody'));
